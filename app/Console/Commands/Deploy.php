@@ -58,16 +58,19 @@ class Deploy extends Command
         $test('الاتصال بقاعدة البيانات', $this->dbOk(), 'راجع إعدادات DB_*');
         $test('جداول المحتوى موجودة', Schema::hasTable('services') && Schema::hasTable('settings'),
             'php artisan migrate --seed');
-        // file_exists لا is_link: ويندوز ينشئ الرابط بنوع مختلف يجعل is_link تُرجع false
-        $test('رابط storage موجود', file_exists(public_path('storage')),
-            'php artisan storage:link');
+        // في النشر المقسوم يكون الرابط في جذر الويب لا داخل public المشروع،
+        // فنقرأ موضعه من PUBLIC_DOCROOT إن كان مضبوطاً.
+        // file_exists لا is_link: ويندوز ينشئ الرابط بنوع مختلف يجعل is_link تُرجع false.
+        $docroot = rtrim((string) env('PUBLIC_DOCROOT', public_path()), '/');
+        $test('رابط storage موجود', file_exists($docroot.'/storage'),
+            'php artisan storage:link  (أو أنشئه يدوياً في جذر الويب)');
         $test('مجلد storage قابل للكتابة', is_writable(storage_path()), 'chmod -R 775 storage');
         $test('bootstrap/cache قابل للكتابة', is_writable(base_path('bootstrap/cache')),
             'chmod -R 775 bootstrap/cache');
         $test('public/robots.txt غير موجود', ! file_exists(public_path('robots.txt')),
             'احذفه — وجوده يحجب راوت robots الديناميكي');
-        $test('كلمة مرور المدير غُيّرت', ! $this->defaultPasswordInUse(),
-            'غيّرها من: اللوحة › حسابي');
+        $test('كلمة مرور المدير ليست المنشورة', ! $this->defaultPasswordInUse(),
+            'غيّرها فوراً من: اللوحة › حسابي');
         $test('الجلسة بكوكي آمن (HTTPS)', config('session.secure') === true,
             'اضبط SESSION_SECURE_COOKIE=true بعد تركيب SSL');
         $test('لا صور بروابط خارجية', $this->noExternalImages(),
@@ -98,12 +101,17 @@ class Deploy extends Command
         }
     }
 
+    /** كلمة المرور التي نُشرت سابقاً في التوثيق — يجب ألا تبقى مستخدمة. */
     private function defaultPasswordInUse(): bool
     {
         try {
-            $user = User::where('email', 'admin@konozcompany.com')->first();
+            foreach (User::all() as $user) {
+                if (Hash::check('konoz@2026', $user->password)) {
+                    return true;
+                }
+            }
 
-            return $user && Hash::check('konoz@2026', $user->password);
+            return false;
         } catch (\Throwable) {
             return false;
         }

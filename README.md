@@ -18,14 +18,20 @@ php artisan serve
 
 الموقع: `http://localhost:8000` · اللوحة: `http://localhost:8000/admin`
 
-**بيانات الدخول الأولى** (غيّرها فوراً بعد النشر):
+### حساب اللوحة
 
-```
-admin@konozcompany.com
-konoz@2026
+`db:seed` يُنشئ الحساب مرة واحدة **بكلمة مرور عشوائية يطبعها في الطرفية** —
+احفظها وقتها، لن تظهر مرة أخرى. لا توجد كلمة مرور ثابتة في الكود لأن
+المستودع عام.
+
+لتحديدها مسبقاً، اضبط في `.env` قبل الزرع:
+
+```env
+ADMIN_EMAIL=you@example.com
+ADMIN_PASSWORD=كلمة-مرور-قوية
 ```
 
-لتغيير كلمة المرور:
+تغييرها لاحقاً: **اللوحة › حسابي**، أو:
 
 ```bash
 php artisan tinker
@@ -173,9 +179,25 @@ chown -R www-data:www-data storage bootstrap/cache   # حسب مستخدم ال�
 
 ### 6. أخيراً
 
-1. **غيّر كلمة مرور المدير** من: اللوحة › حسابي
+1. احفظ كلمة مرور اللوحة التي طبعها `db:seed`، وغيّرها من: اللوحة › حسابي
 2. أرسل `sitemap.xml` في Search Console وراقب تحوّل الروابط القديمة
 3. تأكد أن `php artisan konoz:deploy --check` يعطي «جاهز للإطلاق»
+
+### نشر بجذر ويب منفصل (استضافة مشتركة)
+
+إن كان كود المشروع خارج جذر الويب — وهو الأفضل — ضع في `.env`:
+
+```env
+PUBLIC_DOCROOT=/home/user/domains/site.com/public_html/sub
+```
+
+ليعرف `konoz:deploy --check` أين يبحث عن رابط `storage`.
+وانسخ محتويات `public/` إلى ذلك الجذر، مع تعديل `index.php` ليشير
+لمسار المشروع، وأنشئ الرابط:
+
+```bash
+ln -s /path/to/project/storage/app/public  $PUBLIC_DOCROOT/storage
+```
 
 ### عند أي تحديث لاحق
 

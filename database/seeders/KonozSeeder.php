@@ -42,11 +42,27 @@ class KonozSeeder extends Seeder
 
     public function run(): void
     {
-        /* ---------- مستخدم اللوحة ---------- */
-        User::updateOrCreate(
-            ['email' => 'admin@konozcompany.com'],
-            ['name' => 'مدير الموقع', 'password' => Hash::make('konoz@2026')],
-        );
+        /* ---------- مستخدم اللوحة ----------
+           لا كلمة مرور ثابتة في الكود: المستودع عام، وأي كلمة مكتوبة هنا
+           تصبح معروفة للجميع. تُقرأ من ADMIN_PASSWORD أو تُولَّد عشوائياً
+           وتُطبع مرة واحدة عند الإنشاء. */
+        $email = env('ADMIN_EMAIL', 'admin@konozcompany.com');
+
+        if (! User::where('email', $email)->exists()) {
+            $password = env('ADMIN_PASSWORD') ?: Str::password(16);
+
+            User::create([
+                'name' => env('ADMIN_NAME', 'مدير الموقع'),
+                'email' => $email,
+                'password' => Hash::make($password),
+            ]);
+
+            $this->command?->newLine();
+            $this->command?->warn('  أُنشئ حساب اللوحة — احفظ البيانات الآن، لن تظهر مرة أخرى:');
+            $this->command?->line("    البريد      : {$email}");
+            $this->command?->line("    كلمة المرور : {$password}");
+            $this->command?->newLine();
+        }
 
         /* ---------- الإعدادات ---------- */
         $groups = [
