@@ -61,7 +61,7 @@ class Deploy extends Command
         // في النشر المقسوم يكون الرابط في جذر الويب لا داخل public المشروع،
         // فنقرأ موضعه من PUBLIC_DOCROOT إن كان مضبوطاً.
         // file_exists لا is_link: ويندوز ينشئ الرابط بنوع مختلف يجعل is_link تُرجع false.
-        $docroot = rtrim((string) env('PUBLIC_DOCROOT', public_path()), '/');
+        $docroot = rtrim((string) (config('konoz.public_docroot') ?: public_path()), '/');
         $test('رابط storage موجود', file_exists($docroot.'/storage'),
             'php artisan storage:link  (أو أنشئه يدوياً في جذر الويب)');
         $test('مجلد storage قابل للكتابة', is_writable(storage_path()), 'chmod -R 775 storage');
