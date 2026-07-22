@@ -1,0 +1,38 @@
+[
+  {
+    "title": "ضمان مكتوب",
+    "body": "كل عملية تركيب وكل قطعة غيار مشمولة بضمان موثّق، لا بوعود شفهية.",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"/><path d=\"m9 12 2 2 4-4\"/></svg>",
+    "sort": 1
+  },
+  {
+    "title": "قطع غيار أصلية",
+    "body": "نتعامل مع وكلاء معتمدين، ولا نُركّب قطعاً مقلّدة مهما بلغ فارق السعر.",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M19.4 15a1.7 1.7 0 0 0 .3 1.9 2 2 0 1 1-2.8 2.8 1.7 1.7 0 0 0-2.9 1.2 2 2 0 1 1-4 0 1.7 1.7 0 0 0-2.9-1.2 2 2 0 1 1-2.8-2.8A1.7 1.7 0 0 0 4.6 15a2 2 0 1 1 0-4 1.7 1.7 0 0 0 1.2-2.9 2 2 0 1 1 2.8-2.8A1.7 1.7 0 0 0 11.5 4.1a2 2 0 1 1 4 0 1.7 1.7 0 0 0 2.9 1.2 2 2 0 1 1 2.8 2.8A1.7 1.7 0 0 0 22.4 11a2 2 0 1 1 0 4z\"/></svg>",
+    "sort": 2
+  },
+  {
+    "title": "استجابة في نفس اليوم",
+    "body": "تُعالَج أعطال الطوارئ داخل الرياض خلال ساعات، لا أيام.",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M13 2 3 14h8l-1 8 10-12h-8z\"/></svg>",
+    "sort": 3
+  },
+  {
+    "title": "تقرير فني بعد كل زيارة",
+    "body": "تعرف على وجه التحديد ما جرى فحصه وما تم إصلاحه وما يحتاج إلى متابعة.",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"/><path d=\"M14 2v6h6M9 15h6M9 11h3\"/></svg>",
+    "sort": 4
+  },
+  {
+    "title": "فريق مرخّص ومدرّب",
+    "body": "مهندسون وفنيون متخصصون في المصاعد تحديداً، لا فنيّو كهرباء عامّون.",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2\"/><circle cx=\"9\" cy=\"7\" r=\"4\"/><path d=\"M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8\"/></svg>",
+    "sort": 5
+  },
+  {
+    "title": "التزام بالمواعيد",
+    "body": "جدول تركيب واضح منذ اليوم الأول، وبنود التزام زمني نوقّع عليها في العقد.",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4\"/></svg>",
+    "sort": 6
+  }
+]

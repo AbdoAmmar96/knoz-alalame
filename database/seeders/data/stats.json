@@ -1,0 +1,30 @@
+[
+  {
+    "value": "15",
+    "suffix": "+",
+    "is_counter": true,
+    "label": "عاماً في سوق المصاعد",
+    "sort": 1
+  },
+  {
+    "value": "130",
+    "suffix": "+",
+    "is_counter": true,
+    "label": "مصعداً تم تركيبه وصيانته",
+    "sort": 2
+  },
+  {
+    "value": "0",
+    "suffix": "",
+    "is_counter": false,
+    "label": "مهندساً وفنياً متخصصاً",
+    "sort": 3
+  },
+  {
+    "value": "24/7",
+    "suffix": "",
+    "is_counter": false,
+    "label": "استجابة لأعطال الطوارئ",
+    "sort": 4
+  }
+]

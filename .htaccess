@@ -1,0 +1,34 @@
+# ==========================================================
+#  للاستضافات المشتركة التي لا تسمح بتغيير جذر الدومين (Document Root)
+# ==========================================================
+#  الوضع المثالي: ارفع المشروع خارج public_html واجعل جذر الدومين
+#  يشير إلى مجلد public — عندها احذف هذا الملف، فهو غير مطلوب.
+#
+#  أما إن اضطررت لرفع المشروع كله داخل public_html فهذا الملف
+#  يحوّل كل الطلبات إلى مجلد public دون إظهاره في الرابط.
+#
+#  ⚠ في هذه الحالة تصبح ملفات المشروع تحت جذر الويب نظرياً؛
+#     قواعد الحجب في public/.htaccess ونهاية هذا الملف تمنع
+#     الوصول إلى .env وبقية الملفات الحساسة.
+# ==========================================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+Options -Indexes
+
+<FilesMatch "^\.env">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "^(composer\.(json|lock)|package(-lock)?\.json|artisan|phpunit\.xml)$">
+    Require all denied
+</FilesMatch>
+
+RedirectMatch 404 /\.git
+RedirectMatch 404 /storage/(app|framework|logs)/
+RedirectMatch 404 /(app|bootstrap|config|database|resources|routes|tests|vendor)/

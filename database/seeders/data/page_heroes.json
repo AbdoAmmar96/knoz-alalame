@@ -1,0 +1,27 @@
+{
+    "about": {
+        "image": "content/8abb65d2877d34c5c756f8219e3c3544.jpeg",
+        "title": "نبذة عنا",
+        "eyebrow": "نبذة عنا"
+    },
+    "services": {
+        "image": "content/555fb683900cd813f1dcc5fe8d2a65c4.jpeg",
+        "title": "خدماتنا",
+        "eyebrow": "خدماتنا"
+    },
+    "gallery": {
+        "image": "content/6e89806fc2cc2c4be3bd36acc88ff190.jpeg",
+        "title": "أعمالنا",
+        "eyebrow": "معرض الأعمال"
+    },
+    "blog": {
+        "image": "content/c3b6596c90cd70e93676702e58bea7c1.jpeg",
+        "title": "المقالات",
+        "eyebrow": "المقالات"
+    },
+    "contact": {
+        "image": "content/e39bfafe9bfa243fac4204a7e9c60e4d.jpeg",
+        "title": "تواصل معنا",
+        "eyebrow": "تواصل معنا"
+    }
+}
