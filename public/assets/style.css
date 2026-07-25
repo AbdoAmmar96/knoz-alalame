@@ -236,14 +236,21 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
   background:linear-gradient(160deg,var(--orange-2),var(--orange) 52%,var(--orange-3));
   border:1px solid rgba(255,255,255,.3);
   box-shadow:0 0 0 1px rgba(233,113,28,.55),0 8px 26px rgba(233,113,28,.5),0 0 44px rgba(233,113,28,.32)}
+/* الداخل يظهر عند فتح البابين: جدار دافئ + ضوء سقف + مسند وخط أرضية */
 .cabin::before{content:"";position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 45%,rgba(255,248,238,.95),rgba(255,214,170,.45) 56%,transparent 76%)}
-.cabin::after{content:"";position:absolute;top:-4px;inset-inline:22%;height:4px;border-radius:4px;
-  background:#FFD9A8;box-shadow:0 0 12px var(--orange-2);z-index:3}
+  background:
+    linear-gradient(180deg,transparent 80%,rgba(94,52,16,.55) 84%,transparent 90%),
+    linear-gradient(180deg,transparent 50%,rgba(150,92,44,.4) 52%,transparent 55%),
+    radial-gradient(95% 58% at 50% 4%,rgba(255,251,244,.9),rgba(255,228,197,.3) 55%,transparent 80%),
+    linear-gradient(180deg,#F6E1C8,#E7BF93)}
+/* عتبة علوية مضيئة ناعمة */
+.cabin::after{content:"";position:absolute;top:0;inset-inline:12%;height:3px;border-radius:0 0 4px 4px;
+  background:linear-gradient(90deg,transparent,#FFE7C4,transparent);z-index:3}
+/* البابان: برتقالي بلمعة رأسية وخيط ضوء عند حافة الالتقاء */
 .cabin .cd{position:absolute;top:0;bottom:0;width:50.5%;z-index:2;
-  background:linear-gradient(160deg,#D2620F 0%,#9C440A 100%);box-shadow:inset 0 0 12px rgba(0,0,0,.35)}
-.cabin .cd.l{left:0;border-right:1px solid rgba(255,236,210,.55)}
-.cabin .cd.r{right:0;border-left:1px solid rgba(255,236,210,.55)}
+  background:linear-gradient(105deg,#A94C0D 0%,#C85A10 40%,#DE6C15 52%,#B85210 70%,#9C440A 100%)}
+.cabin .cd.l{left:0;box-shadow:inset -1.5px 0 0 rgba(255,238,214,.6),inset 0 0 14px rgba(0,0,0,.25)}
+.cabin .cd.r{right:0;box-shadow:inset 1.5px 0 0 rgba(255,238,214,.6),inset 0 0 14px rgba(0,0,0,.25)}
 /* الكبينتان بنفس الحركة لكن بإزاحة نصف دورة فتتعاكسان (واحدة صاعدة والأخرى نازلة) */
 .cabin.up{animation:ride2 8s ease-in-out infinite}
 .cabin.up .cd.l{animation:cd2L 8s ease-in-out infinite}
@@ -549,12 +556,31 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
   font-size:.85rem;color:rgba(185,193,204,.72)}
 .ftr-bottom a{color:rgba(185,193,204,.9)}
 
-/* ===== 18. واتساب عائم ===== */
-.wa{position:fixed;bottom:26px;inset-inline-start:26px;z-index:120;width:58px;height:58px;
-  border-radius:50%;background:#25D366;border:3px solid #fff;display:grid;place-items:center;
-  box-shadow:0 10px 30px rgba(37,211,102,.45);transition:transform .22s var(--ease),box-shadow .22s}
-.wa:hover{transform:scale(1.09);box-shadow:0 16px 40px rgba(37,211,102,.6)}
-.wa svg{width:29px;height:29px;fill:#fff}
+/* ===== 18. أيقونات التواصل العائمة ===== */
+.social-fab{position:fixed;bottom:22px;inset-inline-start:20px;z-index:120;
+  display:flex;flex-direction:column;gap:11px}
+.social-fab .sf{position:relative;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;
+  color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.92),0 8px 22px rgba(23,27,33,.22);
+  transition:transform .2s var(--ease),box-shadow .2s}
+.social-fab .sf:hover{transform:scale(1.1)}
+.social-fab .sf svg{width:24px;height:24px}
+/* التسمية تنزلق للجانب عند المرور */
+.social-fab .sf span{position:absolute;inset-inline-end:100%;margin-inline-end:12px;top:50%;
+  transform:translateY(-50%) scale(.9);white-space:nowrap;background:var(--ink-2);color:#fff;
+  font-size:.8rem;font-weight:700;padding:6px 12px;border-radius:8px;
+  opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:var(--sh)}
+.social-fab .sf:hover span{opacity:1;transform:translateY(-50%) scale(1)}
+/* ألوان المنصّات */
+.sf-whatsapp{background:#25D366}
+.sf-instagram{background:radial-gradient(circle at 30% 107%,#FDF497 0%,#FD5949 45%,#D6249F 70%,#285AEB 100%)}
+.sf-tiktok{background:#010101}
+.sf-snapchat{background:#FFFC00;color:#0F0F0F}
+.sf-facebook{background:#1877F2}
+.sf-x{background:#111}
+.sf-youtube{background:#FF0000}
+/* نبض على واتساب */
+.sf-whatsapp::after{content:"";position:absolute;inset:-3px;border-radius:50%;pointer-events:none;
+  border:2px solid rgba(37,211,102,.6);animation:waRing 2.6s ease-out infinite}
 
 /* ===== 19. هيرو الصفحات الداخلية ===== */
 /* خلفية ثابتة (بلا حركة دائمة) + محتوى فعلي: عنوان ووصف ومختصرات ومسار. */
@@ -808,9 +834,7 @@ textarea:focus-visible,summary:focus-visible{outline:3px solid var(--orange);out
 /* --- خط العنوان الفرعي: ثابت --- */
 .eyebrow::before{background:linear-gradient(90deg,var(--orange),transparent)}
 
-/* --- زرّ واتساب: حلقة نبض واحدة (عنصر واحد رخيص) --- */
-.wa::after{content:"";position:absolute;inset:-3px;border-radius:50%;pointer-events:none;
-  border:2px solid rgba(37,211,102,.6);animation:waRing 2.6s ease-out infinite}
+/* --- حلقة نبض واتساب (معرّفة مع أيقونات التواصل) --- */
 @keyframes waRing{0%{transform:scale(1);opacity:.75}
   70%,100%{transform:scale(1.5);opacity:0}}
 
@@ -893,15 +917,17 @@ textarea:focus-visible,summary:focus-visible{outline:3px solid var(--orange);out
   .map-wrap{height:280px;margin-top:32px}
   .btn{padding:13px 22px;font-size:.92rem}
   .btn-row .btn{flex:1 1 auto;justify-content:center}
-  .wa{width:52px;height:52px;bottom:18px;inset-inline-start:18px}
-  .wa svg{width:26px;height:26px}
+  .social-fab{bottom:16px;inset-inline-start:14px;gap:9px}
+  .social-fab .sf{width:44px;height:44px}
+  .social-fab .sf svg{width:21px;height:21px}
 
   /* الهيرو: مصعد أكبر وغير مقطوع + إحصائيات في صف واحد */
   .hero{padding-top:100px;padding-bottom:52px}
   .hero-grid{gap:36px}
   .hero .lead{margin-bottom:26px}
   .hero-cta{margin-bottom:32px}
-  .shaft{width:min(280px,74vw);aspect-ratio:.66}
+  /* البئران شبكة مرنة: نُحجّم الحاوية لا كل بئر — وإلا فاضا خارج الشاشة */
+  .shafts{width:min(300px,82vw);aspect-ratio:.88;gap:11px}
   .shaft-wrap{gap:14px;padding-bottom:8px}
   .shaft-chip{position:static;margin-top:4px;bottom:auto;inset-inline-end:auto}
   .hero-stats{gap:0;justify-content:space-between}

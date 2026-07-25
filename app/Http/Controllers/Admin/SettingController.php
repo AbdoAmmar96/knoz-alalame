@@ -29,6 +29,14 @@ class SettingController extends Controller
                 'hours_note' => ['label' => 'ملاحظة أوقات العمل', 'type' => 'text'],
                 'map_embed' => ['label' => 'رابط خريطة جوجل (src الخاص بالـ iframe)', 'type' => 'textarea'],
             ]],
+            'social' => ['label' => 'روابط التواصل الاجتماعي', 'fields' => [
+                'social_instagram' => ['label' => 'إنستغرام', 'type' => 'text', 'hint' => 'رابط الحساب كاملاً'],
+                'social_tiktok' => ['label' => 'تيك توك', 'type' => 'text'],
+                'social_snapchat' => ['label' => 'سناب شات', 'type' => 'text'],
+                'social_facebook' => ['label' => 'فيسبوك', 'type' => 'text'],
+                'social_x' => ['label' => 'إكس (تويتر)', 'type' => 'text'],
+                'social_youtube' => ['label' => 'يوتيوب', 'type' => 'text'],
+            ]],
             'hero' => ['label' => 'واجهة الرئيسية', 'fields' => [
                 'hero_eyebrow' => ['label' => 'السطر العلوي', 'type' => 'text'],
                 'hero_title_1' => ['label' => 'العنوان — السطر الأول', 'type' => 'text'],

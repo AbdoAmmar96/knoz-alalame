@@ -111,7 +111,7 @@
   <div class="ftr-bottom"><div class="wrap">{!! setting('copyright') !!}</div></div>
 </footer>
 
-<a href="{{ whatsapp_url() }}" class="wa" aria-label="تواصل عبر واتساب"><x-icon name="whatsapp-solid" /></a>
+<x-site.social-fab />
 
 <script src="{{ asset('assets/app.js') }}?v={{ filemtime(public_path('assets/app.js')) }}"></script>
 </body>
