@@ -779,7 +779,7 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
 
 /* ===== 23.5 تأثير المغناطيس على البطاقات ===== */
 /* الـ transform نفسه يكتبه app.js مباشرة على العنصر — هنا الوهج فقط */
-.magnet{--gx:50%;--gy:50%;will-change:transform}
+.magnet{--gx:50%;--gy:50%}
 /* وهج يتبع المؤشر — يُستثنى .sector لأنه يملك تدرّجه الخاص */
 .magnet:not(.sector)::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
   opacity:0;transition:opacity .3s;z-index:1;
@@ -792,7 +792,7 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
 .stats-grid .stat.magnet::after{background:radial-gradient(300px circle at var(--gx) var(--gy),rgba(233,113,28,.22),transparent 62%)}
 
 /* ===== 24. الظهور عند التمرير ===== */
-.rv{opacity:0;transform:translateY(26px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .45s var(--ease),transform .45s var(--ease)}
 .rv.in{opacity:1;transform:none}
 
 /* ===== 25. الإتاحة ===== */

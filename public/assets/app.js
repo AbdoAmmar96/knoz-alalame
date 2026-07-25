@@ -56,7 +56,8 @@
         })(t0);
       });
     });
-  }, { threshold: .18 });
+    // نكشف العنصر قبل دخوله للشاشة بمسافة ليكون ظاهراً وقت وصوله (لا تأخير محسوس)
+  }, { threshold: 0, rootMargin: '0px 0px 14% 0px' });
   document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
 
   /* --- ظهور متتابع لعناصر الشبكات: كل بطاقة تتأخّر قليلاً عن سابقتها --- */
@@ -67,8 +68,8 @@
       var i = 0;
       Array.prototype.forEach.call(grid.children, function (child) {
         if (!child.classList.contains('rv')) { child.classList.add('rv'); io.observe(child); }
-        // سقف 6 خطوات حتى لا تتأخّر الشبكات الطويلة أكثر من اللازم
-        child.style.setProperty('--d', (Math.min(i, 6) * 0.09).toFixed(2) + 's');
+        // تأخّر بسيط جداً بين البطاقات (سقف منخفض) كي لا يبدو الظهور بطيئاً
+        child.style.setProperty('--d', (Math.min(i, 5) * 0.05).toFixed(2) + 's');
         i++;
       });
     });
@@ -85,6 +86,7 @@
       var base = el.style.transition;
       el.addEventListener('pointerenter', function () {
         el.style.transition = 'transform .14s cubic-bezier(.22,1,.36,1)';
+        el.style.willChange = 'transform'; // مؤقتاً أثناء التحويم فقط (لا يُبقي طبقات دائمة تُبطئ التمرير)
       });
       // بلا requestAnimationFrame: المتصفح يدمج أحداث pointermove في الإطار أصلاً
       el.addEventListener('pointermove', function (e) {
@@ -103,7 +105,7 @@
       el.addEventListener('pointerleave', function () {
         el.style.transition = 'transform .45s cubic-bezier(.22,1,.36,1)';
         el.style.transform = '';
-        setTimeout(function () { el.style.transition = base; }, 460);
+        setTimeout(function () { el.style.transition = base; el.style.willChange = ''; }, 460);
       });
     });
   }
