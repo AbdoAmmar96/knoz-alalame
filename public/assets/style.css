@@ -134,8 +134,11 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
 .brand:hover{transform:translateY(-2px)}
 .brand img{height:64px;width:auto;transition:height .3s}
 .hdr.stuck .brand img{height:52px}
-.nav ul{display:flex;gap:26px;align-items:center}
-.nav a{position:relative;font-size:.95rem;font-weight:600;color:var(--tx-2);padding-block:8px;transition:color .2s}
+.nav ul{display:flex;flex-wrap:nowrap;gap:22px;align-items:center}
+.nav a{position:relative;font-size:.95rem;font-weight:600;color:var(--tx-2);padding-block:8px;
+  white-space:nowrap;transition:color .2s}
+.hdr-in{flex-wrap:nowrap}
+.nav,.hdr-cta{flex-shrink:0}
 .nav a::after{content:"";position:absolute;bottom:0;inset-inline-start:0;width:0;height:2px;
   background:var(--orange);border-radius:2px;transition:width .28s var(--ease)}
 .nav a:hover{color:var(--tx)}
@@ -901,6 +904,14 @@ textarea:focus-visible,summary:focus-visible{outline:3px solid var(--orange);out
 .rv{transition-delay:var(--d,0s)}
 
 /* ===== 26. الاستجابة ===== */
+/* شاشات متوسطة: نُبقي الهيدر في سطر واحد بإخفاء رقم الهاتف وتضييق المسافات */
+@media(max-width:1240px){
+  .hdr-phone{display:none}
+  .hdr-in{gap:16px}
+  .nav ul{gap:15px}
+  .nav a{font-size:.9rem}
+  .brand img{height:56px}
+}
 @media(max-width:1080px){
   .nav{display:none}
   .burger{display:flex}
