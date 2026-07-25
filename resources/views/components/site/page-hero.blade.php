@@ -7,11 +7,11 @@
     'tags' => ['معاينة مجانية', 'ضمان مكتوب', 'استجابة 24/7'],
 ])
 
-{{-- هيرو الصفحات الداخلية: بنفس شكل هيرو الرئيسية — خلفية دافئة نظيفة + بئر مصعد متحرك --}}
+{{-- هيرو الصفحات الداخلية: نفس خلفية هيرو الرئيسية النظيفة، بمحتوى في المنتصف وبلا مصعد --}}
 <section class="page-hero">
   <div class="hero-glow"></div>
-  <div class="wrap ph-grid">
-    <div class="ph-copy rv">
+  <div class="wrap rv">
+    <div class="ph-in">
       @if($eyebrow)<span class="eyebrow">{{ $eyebrow }}</span>@endif
       <h1>{{ $title }}</h1>
       @if($lead)<p class="lead">{{ $lead }}</p>@endif
@@ -22,6 +22,5 @@
       @endif
       <div class="crumbs"><a href="{{ route('home') }}">الرئيسية</a><span>—</span><b>{{ $crumb ?? $title }}</b></div>
     </div>
-    <x-site.elevator />
   </div>
 </section>

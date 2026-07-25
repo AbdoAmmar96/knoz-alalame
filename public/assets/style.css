@@ -388,10 +388,15 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
 .card-img .card-bd{padding:30px 28px}
 .card-img::before{z-index:3}
 
-/* ===== 10.7 بطاقة الخدمة المميّزة: إطار برتقالي يبرزها على الخلفية الكحلية ===== */
-.card.card-featured{border:2px solid var(--orange);z-index:2;
-  box-shadow:0 0 0 4px rgba(233,113,28,.16),0 22px 48px rgba(233,113,28,.24)}
+/* ===== 10.7 بطاقة الخدمة المميّزة (الوسطى) بجسم كحلي تبرز على الخلفية الكريمية ===== */
+.card.card-featured{border-color:var(--navy);box-shadow:0 22px 50px rgba(14,27,46,.28);z-index:2}
 .card-featured::before{transform:scaleX(1)} /* الشريط البرتقالي ممتد دائماً */
+.card-featured .card-bd{background:linear-gradient(172deg,var(--navy-2),var(--navy) 62%,var(--navy-3))}
+.card-featured .card-bd h3{color:#fff}
+.card-featured .card-bd p{color:rgba(255,255,255,.8)}
+.card-featured .card-bd .feats li{color:rgba(255,255,255,.86)}
+.card-featured .card-bd .feats li::before{background:var(--orange-2);opacity:1}
+.card-featured .card-bd .link-or{color:var(--orange-2)}
 .card-featured .card-badge{position:absolute;top:14px;inset-inline-end:14px;z-index:4;
   display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:800;color:#fff;
   background:var(--orange);border-radius:var(--r-pill);padding:6px 13px;
@@ -632,26 +637,26 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
   border:2px solid rgba(37,211,102,.6);animation:waRing 2.6s ease-out infinite}
 
 /* ===== 19. هيرو الصفحات الداخلية ===== */
-/* بنفس شكل هيرو الرئيسية: خلفية دافئة نظيفة + وهج برتقالي + بئر مصعد متحرك بجانب النص. */
-.page-hero{position:relative;padding:150px 0 80px;overflow:hidden;isolation:isolate;
+/* نفس خلفية هيرو الرئيسية النظيفة، لكن المحتوى في المنتصف وواضح وبلا مصعد. */
+.page-hero{position:relative;padding:152px 0 74px;overflow:hidden;isolation:isolate;
   background:linear-gradient(165deg,#FFFFFF 0%,#FFFAF4 52%,#FCEEDF 100%)}
-.ph-grid{position:relative;display:grid;grid-template-columns:1.06fr .94fr;
-  gap:clamp(36px,6vw,80px);align-items:center;width:100%}
-.ph-copy{text-align:start}
+/* المحتوى متمركز وواضح حتى لا يبدو القسم فارغاً */
+.page-hero .ph-in{position:relative;max-width:860px;margin-inline:auto;text-align:center;
+  display:flex;flex-direction:column;align-items:center}
 .page-hero .eyebrow{background:rgba(255,255,255,.72);border:1px solid rgba(233,113,28,.28);
-  border-radius:var(--r-pill);padding:8px 18px 8px 14px;margin-bottom:22px;
+  border-radius:var(--r-pill);padding:8px 18px 8px 14px;margin-bottom:20px;
   box-shadow:0 6px 18px rgba(233,113,28,.13);backdrop-filter:blur(8px)}
 .page-hero .eyebrow::before{width:9px;height:9px;border-radius:50%;background:var(--orange);
   box-shadow:0 0 0 0 rgba(233,113,28,.6);animation:pingDot 2.2s ease-out infinite}
-.page-hero h1{font-size:clamp(2.3rem,4.6vw,3.7rem);line-height:1.14;margin:0 0 20px;position:relative;
-  max-width:18ch;padding-bottom:18px}
-.page-hero h1::after{content:"";position:absolute;bottom:0;inset-inline-start:0;
-  width:86px;height:4px;border-radius:4px;
+.page-hero h1{font-size:clamp(2.5rem,5vw,4rem);line-height:1.12;margin:0 0 20px;position:relative;
+  max-width:20ch;padding-bottom:18px}
+.page-hero h1::after{content:"";position:absolute;bottom:0;inset-inline:0;margin-inline:auto;
+  width:88px;height:4px;border-radius:4px;
   background:linear-gradient(90deg,var(--orange-3),var(--orange),#FFC078)}
-.page-hero .lead{font-size:clamp(1.05rem,1.7vw,1.28rem);line-height:1.9;color:var(--tx-2);
-  max-width:56ch;margin:0 0 26px}
-/* مختصرات بمحاذاة النص */
-.ph-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+.page-hero .lead{font-size:clamp(1.08rem,1.7vw,1.32rem);line-height:1.9;color:var(--tx-2);
+  max-width:62ch;margin:0 auto 26px}
+/* مختصرات في المنتصف */
+.ph-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:26px}
 .ph-tags span{display:inline-flex;align-items:center;gap:9px;font-size:.86rem;font-weight:700;
   color:var(--tx);background:rgba(255,255,255,.82);border:1px solid rgba(233,113,28,.28);
   border-radius:var(--r-pill);padding:8px 16px;box-shadow:var(--sh)}
@@ -885,8 +890,7 @@ textarea:focus-visible,summary:focus-visible{outline:3px solid var(--orange);out
   .hero-grid{grid-template-columns:1fr;gap:52px}
   .hero{min-height:auto;padding-top:120px}
   .hero .shaft-wrap{order:-1}
-  .ph-grid{grid-template-columns:1fr;gap:44px}
-  .page-hero{padding:120px 0 60px}
+  .page-hero{padding:120px 0 56px}
   .cards,.feat-grid,.proj-grid,.quotes,.art-grid,.sector-grid{grid-template-columns:repeat(2,1fr)}
   .gal-grid{grid-template-columns:repeat(3,1fr)}
   .sector{min-height:340px}
