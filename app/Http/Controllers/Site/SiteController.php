@@ -106,6 +106,15 @@ class SiteController extends Controller
         ]);
     }
 
+    public function testimonials()
+    {
+        return view('site.testimonials', [
+            'seo' => Seo::for('testimonials', ['crumbs' => ['آراء العملاء' => route('testimonials')]]),
+            'testimonials' => Testimonial::live(),
+            'stats' => Stat::live(),
+        ]);
+    }
+
     public function blog()
     {
         return view('site.blog', [

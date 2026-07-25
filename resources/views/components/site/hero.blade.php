@@ -22,16 +22,15 @@
       </div>
     </div>
     <div class="shaft-wrap rv">
-      <div class="shaft-led"><span class="tri"></span><span class="digits"><i>1</i><i>2</i><i>3</i><i>4</i></span></div>
-      <div class="shaft">
-        <span class="rail a"></span><span class="rail b"></span>
-        <div class="floors">
-          <span class="fl"><i></i>01</span>
-          <span class="fl"><i></i>02</span>
-          <span class="fl"><i></i>03</span>
-          <span class="fl"><i></i>04</span>
+      <div class="shafts">
+        <div class="shaft">
+          <span class="rail a"></span><span class="rail b"></span>
+          <div class="cabin up"><span class="cd l"></span><span class="cd r"></span></div>
         </div>
-        <div class="cabin"><span class="cd l"></span><span class="cd r"></span></div>
+        <div class="shaft">
+          <span class="rail a"></span><span class="rail b"></span>
+          <div class="cabin down"><span class="cd l"></span><span class="cd r"></span></div>
+        </div>
       </div>
       <div class="shaft-chip"><x-icon name="clock" /><div><b>24/7</b><small>استجابة لأعطال الطوارئ</small></div></div>
     </div>

@@ -1,9 +1,9 @@
 [
   {
-    "value": "15",
+    "value": "8",
     "suffix": "+",
     "is_counter": true,
-    "label": "عاماً في سوق المصاعد",
+    "label": "أعوام في السوق السعودي",
     "sort": 1
   },
   {
@@ -14,9 +14,9 @@
     "sort": 2
   },
   {
-    "value": "0",
+    "value": "14",
     "suffix": "",
-    "is_counter": false,
+    "is_counter": true,
     "label": "مهندساً وفنياً متخصصاً",
     "sort": 3
   },

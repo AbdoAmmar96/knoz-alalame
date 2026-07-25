@@ -58,6 +58,7 @@ if (! function_exists('nav_links')) {
             ['label' => 'نبذة عنا', 'route' => 'about', 'pattern' => 'about'],
             ['label' => 'خدماتنا', 'route' => 'services', 'pattern' => 'services*'],
             ['label' => 'أعمالنا', 'route' => 'gallery', 'pattern' => 'gallery'],
+            ['label' => 'آراء العملاء', 'route' => 'testimonials', 'pattern' => 'testimonials'],
             ['label' => 'المقالات', 'route' => 'blog.index', 'pattern' => 'blog*'],
             ['label' => 'تواصل معنا', 'route' => 'contact', 'pattern' => 'contact'],
         ];

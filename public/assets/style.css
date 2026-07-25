@@ -218,88 +218,56 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
 .shaft-wrap::after{content:"";position:absolute;z-index:-1;top:50%;left:50%;
   width:min(420px,92%);aspect-ratio:1;translate:-50% -50%;border-radius:50%;
   border:1.5px dashed rgba(233,113,28,.28)}
-.shaft{position:relative;width:min(330px,80%);aspect-ratio:.72;border-radius:var(--r-lg);
+/* بئران متجاوران زي مصعد إيوان */
+.shafts{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  width:min(360px,90%);aspect-ratio:.84}
+.shaft{position:relative;border-radius:var(--r-lg);overflow:hidden;
   background:linear-gradient(168deg,var(--ink-3) 0%,var(--ink) 100%);
-  border:1px solid rgba(255,255,255,.09);overflow:hidden;
-  box-shadow:var(--sh-3),inset 0 0 60px rgba(0,0,0,.4)}
-.shaft .rail{position:absolute;top:18px;bottom:18px;width:3px;border-radius:3px;
+  border:1px solid rgba(255,255,255,.09);
+  box-shadow:var(--sh-3),inset 0 0 44px rgba(0,0,0,.45)}
+.shaft .rail{position:absolute;top:14px;bottom:14px;width:3px;border-radius:3px;
   background:linear-gradient(180deg,transparent,rgba(234,113,28,.7),transparent);
-  box-shadow:0 0 14px rgba(234,113,28,.35)}
-.shaft .rail.a{inset-inline-start:34%}
-.shaft .rail.b{inset-inline-end:34%}
-/* عمود مؤشّرات الطوابق على جانب البئر */
-.shaft .floors{position:absolute;inset-block:5%;inset-inline-end:10px;width:38px;z-index:3;
-  display:flex;flex-direction:column-reverse;justify-content:space-between}
-.shaft .fl{display:flex;align-items:center;justify-content:center;gap:5px;height:26px;
-  border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);
-  font-size:.6rem;font-weight:700;color:rgba(255,255,255,.42);direction:ltr;
-  animation:flOn 9s steps(1) infinite}
-.shaft .fl i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.28)}
-.shaft .fl:nth-child(1){animation-delay:0s}
-.shaft .fl:nth-child(2){animation-delay:2.34s}
-.shaft .fl:nth-child(3){animation-delay:4.68s}
-.shaft .fl:nth-child(4){animation-delay:7.02s}
-@keyframes flOn{
-  0%{border-color:var(--orange);background:rgba(233,113,28,.2);color:#fff}
-  17%{border-color:var(--orange);background:rgba(233,113,28,.2);color:#fff}
-  18%,100%{border-color:rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:rgba(255,255,255,.42)}
-}
-/* الكبينة برتقالية بالكامل زي مصعد إيوان */
-.cabin{position:absolute;inset-inline:0;margin-inline:auto;width:46%;height:22%;bottom:6%;
+  box-shadow:0 0 12px rgba(234,113,28,.35)}
+.shaft .rail.a{inset-inline-start:30%}
+.shaft .rail.b{inset-inline-end:30%}
+/* كبينتان برتقاليتان — اليمنى تصعد واليسرى تنزل بتحرّك متعاكس */
+.cabin{position:absolute;inset-inline:0;margin-inline:auto;width:62%;height:24%;bottom:6%;
   border-radius:var(--r-sm);overflow:hidden;
   background:linear-gradient(160deg,var(--orange-2),var(--orange) 52%,var(--orange-3));
   border:1px solid rgba(255,255,255,.3);
-  box-shadow:0 0 0 1px rgba(233,113,28,.55),0 10px 34px rgba(233,113,28,.5),0 0 54px rgba(233,113,28,.34);
-  animation:ride 9s var(--ease) infinite}
-/* ضوء أبيض داخل الكبينة يظهر عند فتح البابين */
+  box-shadow:0 0 0 1px rgba(233,113,28,.55),0 8px 26px rgba(233,113,28,.5),0 0 44px rgba(233,113,28,.32)}
 .cabin::before{content:"";position:absolute;inset:0;
   background:radial-gradient(circle at 50% 45%,rgba(255,248,238,.95),rgba(255,214,170,.45) 56%,transparent 76%)}
-/* عتبة علوية مضيئة */
-.cabin::after{content:"";position:absolute;top:-5px;inset-inline:24%;height:4px;border-radius:4px;
-  background:#FFD9A8;box-shadow:0 0 14px var(--orange-2);z-index:3}
-/* بابا الكبينة — برتقالي أغمق مع خيط ضوء بالمنتصف، يفتحان عند كل وقفة */
+.cabin::after{content:"";position:absolute;top:-4px;inset-inline:22%;height:4px;border-radius:4px;
+  background:#FFD9A8;box-shadow:0 0 12px var(--orange-2);z-index:3}
 .cabin .cd{position:absolute;top:0;bottom:0;width:50.5%;z-index:2;
-  background:linear-gradient(160deg,#D2620F 0%,#9C440A 100%);
-  box-shadow:inset 0 0 14px rgba(0,0,0,.35)}
-.cabin .cd.l{left:0;border-right:1px solid rgba(255,236,210,.55);animation:cabDoorL 9s var(--ease) infinite}
-.cabin .cd.r{right:0;border-left:1px solid rgba(255,236,210,.55);animation:cabDoorR 9s var(--ease) infinite}
-@keyframes cabDoorL{
-  0%,4%{transform:translateX(0)}   8%,14%{transform:translateX(-97%)}
-  18%,30%{transform:translateX(0)} 34%,40%{transform:translateX(-97%)}
-  44%,56%{transform:translateX(0)} 60%,66%{transform:translateX(-97%)}
-  70%,82%{transform:translateX(0)} 86%,92%{transform:translateX(-97%)}
-  96%,100%{transform:translateX(0)}
+  background:linear-gradient(160deg,#D2620F 0%,#9C440A 100%);box-shadow:inset 0 0 12px rgba(0,0,0,.35)}
+.cabin .cd.l{left:0;border-right:1px solid rgba(255,236,210,.55)}
+.cabin .cd.r{right:0;border-left:1px solid rgba(255,236,210,.55)}
+/* الكبينتان بنفس الحركة لكن بإزاحة نصف دورة فتتعاكسان (واحدة صاعدة والأخرى نازلة) */
+.cabin.up{animation:ride2 8s ease-in-out infinite}
+.cabin.up .cd.l{animation:cd2L 8s ease-in-out infinite}
+.cabin.up .cd.r{animation:cd2R 8s ease-in-out infinite}
+.cabin.down{animation:ride2 8s ease-in-out infinite;animation-delay:-4s}
+.cabin.down .cd.l{animation:cd2L 8s ease-in-out infinite;animation-delay:-4s}
+.cabin.down .cd.r{animation:cd2R 8s ease-in-out infinite;animation-delay:-4s}
+/* صعود لأعلى البئر ثم نزول، بوقفتين. الحركة بنسبة ارتفاع الكبينة فلا تخرج عن البئر. */
+@keyframes ride2{
+  0%,12%{transform:translateY(0)}
+  40%,60%{transform:translateY(-268%)}
+  88%,100%{transform:translateY(0)}
 }
-@keyframes cabDoorR{
-  0%,4%{transform:translateX(0)}   8%,14%{transform:translateX(97%)}
-  18%,30%{transform:translateX(0)} 34%,40%{transform:translateX(97%)}
-  44%,56%{transform:translateX(0)} 60%,66%{transform:translateX(97%)}
-  70%,82%{transform:translateX(0)} 86%,92%{transform:translateX(97%)}
-  96%,100%{transform:translateX(0)}
+/* البابان يفتحان عند الوقفتين (أسفل وأعلى) ويُغلقان أثناء الحركة */
+@keyframes cd2L{
+  0%,8%{transform:translateX(-97%)}   12%,40%{transform:translateX(0)}
+  44%,56%{transform:translateX(-97%)} 60%,88%{transform:translateX(0)}
+  92%,100%{transform:translateX(-97%)}
 }
-/* الحركة بنسبة ارتفاع الكبينة نفسها (لا بالبكسل) فلا تخرج عن البئر مهما صغُر العرض.
-   الكبينة 22% من البئر وتبدأ من 6% أسفله، فثلاث قفزات = 66% وتتوقف عند 6% من الأعلى. */
-@keyframes ride{
-  0%,18%{transform:translateY(0)}
-  26%,44%{transform:translateY(-100%)}
-  52%,70%{transform:translateY(-200%)}
-  78%,94%{transform:translateY(-300%)}
-  100%{transform:translateY(0)}
+@keyframes cd2R{
+  0%,8%{transform:translateX(97%)}    12%,40%{transform:translateX(0)}
+  44%,56%{transform:translateX(97%)}  60%,88%{transform:translateX(0)}
+  92%,100%{transform:translateX(97%)}
 }
-.shaft-led{display:flex;align-items:center;gap:11px;background:#fff;border:1.5px solid var(--line);
-  border-radius:var(--r-sm);padding:9px 20px;font-weight:800;font-size:1.2rem;color:var(--orange);
-  box-shadow:var(--sh);direction:ltr}
-.shaft-led .tri{width:0;height:0;border-inline:6px solid transparent;
-  border-bottom:10px solid var(--orange);animation:triBlink 1.1s infinite}
-@keyframes triBlink{50%{opacity:.3}}
-.shaft-led .digits{position:relative;width:1.2em;height:1.4em}
-.shaft-led .digits i{position:absolute;inset:0;display:grid;place-items:center;font-style:normal;
-  opacity:0;animation:digitCycle 9s infinite}
-.shaft-led .digits i:nth-child(1){animation-delay:0s}
-.shaft-led .digits i:nth-child(2){animation-delay:2.34s}
-.shaft-led .digits i:nth-child(3){animation-delay:4.68s}
-.shaft-led .digits i:nth-child(4){animation-delay:7.02s}
-@keyframes digitCycle{0%,22%{opacity:1}25%,100%{opacity:0}}
 /* شريحة عائمة */
 .shaft-chip{position:absolute;bottom:11%;inset-inline-end:2%;background:#fff;
   border:1.5px solid var(--line);border-radius:var(--r);padding:12px 18px;
@@ -597,29 +565,33 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
 .page-hero .ph-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.16;
   z-index:-4;filter:grayscale(.3) saturate(1.2)}
 .page-hero::before{content:"";position:absolute;inset:0;z-index:-3;
-  background:linear-gradient(115deg,rgba(251,247,242,.95) 30%,rgba(251,247,242,.8) 60%,rgba(233,113,28,.2) 100%)}
-/* شبكة + وهج ثابتان */
+  background:linear-gradient(180deg,rgba(251,247,242,.9),rgba(251,247,242,.8))}
+/* شبكة + وهج ثابتان — متمركزان تحت النص */
 .ph-fx{position:absolute;inset:0;z-index:-1;pointer-events:none;
   background:
     linear-gradient(rgba(29,34,41,.05) 1px,transparent 1px) 0 0/54px 54px,
     linear-gradient(90deg,rgba(29,34,41,.05) 1px,transparent 1px) 0 0/54px 54px,
-    radial-gradient(520px 380px at 90% 6%,rgba(233,113,28,.16),transparent 66%);
-  mask-image:radial-gradient(120% 110% at 72% 32%,#000 32%,transparent 82%);
-  -webkit-mask-image:radial-gradient(120% 110% at 72% 32%,#000 32%,transparent 82%)}
+    radial-gradient(680px 440px at 50% 0,rgba(233,113,28,.17),transparent 68%);
+  mask-image:radial-gradient(130% 120% at 50% 28%,#000 42%,transparent 84%);
+  -webkit-mask-image:radial-gradient(130% 120% at 50% 28%,#000 42%,transparent 84%)}
 .page-hero .wrap{position:relative}
-.page-hero .ph-in{max-width:680px}
-.page-hero .eyebrow{background:rgba(255,255,255,.78);border:1px solid rgba(233,113,28,.28);
-  border-radius:var(--r-pill);padding:7px 17px 7px 13px;box-shadow:0 6px 18px rgba(233,113,28,.13);
+/* المحتوى في الوسط وأكبر حجماً حتى لا يبدو القسم فارغاً */
+.page-hero .ph-in{max-width:840px;margin-inline:auto;text-align:center;
+  display:flex;flex-direction:column;align-items:center}
+.page-hero .eyebrow{background:rgba(255,255,255,.8);border:1px solid rgba(233,113,28,.28);
+  border-radius:var(--r-pill);padding:8px 18px 8px 14px;box-shadow:0 6px 18px rgba(233,113,28,.13);
   backdrop-filter:blur(8px)}
 .page-hero .eyebrow::before{width:9px;height:9px;border-radius:50%;background:var(--orange);
   box-shadow:0 0 0 0 rgba(233,113,28,.6);animation:pingDot 2.2s ease-out infinite}
-.page-hero h1{font-size:var(--h-lg);margin:6px 0 16px;position:relative;
-  width:fit-content;max-width:100%;padding-bottom:14px}
-.page-hero h1::after{content:"";position:absolute;bottom:0;inset-inline-start:0;width:72px;height:4px;
-  border-radius:4px;background:linear-gradient(90deg,var(--orange-3),var(--orange),#FFC078)}
-.page-hero .lead{font-size:var(--lead);color:var(--tx-2);max-width:58ch;margin-bottom:22px}
+.page-hero h1{font-size:clamp(2.4rem,5.2vw,4.1rem);line-height:1.12;margin:12px 0 18px;position:relative;
+  max-width:17ch;padding-bottom:16px}
+.page-hero h1::after{content:"";position:absolute;bottom:0;inset-inline:0;margin-inline:auto;
+  width:86px;height:4px;border-radius:4px;
+  background:linear-gradient(90deg,var(--orange-3),var(--orange),#FFC078)}
+.page-hero .lead{font-size:clamp(1.05rem,1.7vw,1.32rem);line-height:1.85;color:var(--tx-2);
+  max-width:62ch;margin:0 auto 24px}
 /* مختصرات تملأ الترويسة بدل تركها فارغة */
-.ph-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.ph-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:24px}
 .ph-tags span{display:inline-flex;align-items:center;gap:9px;font-size:.86rem;font-weight:700;
   color:var(--tx);background:rgba(255,255,255,.82);border:1px solid rgba(233,113,28,.28);
   border-radius:var(--r-pill);padding:8px 16px;box-shadow:var(--sh)}

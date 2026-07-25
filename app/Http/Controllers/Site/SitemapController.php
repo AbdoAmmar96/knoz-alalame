@@ -17,6 +17,7 @@ class SitemapController extends Controller
             ['loc' => route('services'), 'priority' => '0.9', 'freq' => 'monthly'],
             ['loc' => route('contracts'), 'priority' => '0.9', 'freq' => 'monthly'],
             ['loc' => route('gallery'), 'priority' => '0.7', 'freq' => 'monthly'],
+            ['loc' => route('testimonials'), 'priority' => '0.6', 'freq' => 'monthly'],
             ['loc' => route('blog.index'), 'priority' => '0.7', 'freq' => 'weekly'],
             ['loc' => route('contact'), 'priority' => '0.8', 'freq' => 'monthly'],
         ];

@@ -160,8 +160,10 @@ class KonozSeeder extends Seeder
         foreach ($this->data('testimonials') as $row) {
             Testimonial::updateOrCreate(['name' => $row['name']], $row);
         }
+        // المفتاح sort لا label: عنوان الإحصائية قد يتغيّر، فالمطابقة عليه
+        // تُنشئ صفاً مكرّراً بدل تحديث القائم.
         foreach ($this->data('stats') as $row) {
-            Stat::updateOrCreate(['label' => $row['label']], $row);
+            Stat::updateOrCreate(['sort' => $row['sort']], $row);
         }
         foreach ($this->data('marquee') as $row) {
             MarqueeItem::updateOrCreate(['title' => $row['title']], $row);
