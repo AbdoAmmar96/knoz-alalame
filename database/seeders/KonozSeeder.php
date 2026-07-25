@@ -157,8 +157,9 @@ class KonozSeeder extends Seeder
         foreach ($this->data('faqs') as $row) {
             Faq::updateOrCreate(['question' => $row['question']], $row);
         }
+        // المفتاح sort لا name: قد يتغيّر الاسم (مثلاً من الموقع القديم).
         foreach ($this->data('testimonials') as $row) {
-            Testimonial::updateOrCreate(['name' => $row['name']], $row);
+            Testimonial::updateOrCreate(['sort' => $row['sort']], $row);
         }
         // المفتاح sort لا label: عنوان الإحصائية قد يتغيّر، فالمطابقة عليه
         // تُنشئ صفاً مكرّراً بدل تحديث القائم.
