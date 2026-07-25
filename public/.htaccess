@@ -23,13 +23,11 @@
     # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
     # RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
-    # Redirect Trailing Slashes If Not A Folder...
-    # نتجاوز الروابط المُرمّزة (عربية %D8..) لأن إزالة الشرطة هنا تُشوّه ترميز UTF-8
-    # (ترميز مزدوج ⇐ 404)، فنتركها تصل إلى Laravel ليحوّلها 301 بترميز سليم.
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} !%[0-9A-Fa-f]{2}
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
+    # ملاحظة: أُزيلت قاعدة "إزالة الشرطة اللاحقة" من هنا عمداً.
+    # كانت تُشوّه ترميز UTF-8 للروابط العربية المنتهية بشرطة (/الرابط/) فتُنتج
+    # 404 وتُفقد المقالات ترتيبها في جوجل. الآن تصل هذه الروابط إلى Laravel
+    # فيحوّلها 301 بترميز سليم (routes/redirects.php). الروابط الجديدة بلا شرطة
+    # أصلاً، والوسم canonical يمنع أي ازدواج محتوى.
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
