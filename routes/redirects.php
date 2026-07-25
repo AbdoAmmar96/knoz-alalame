@@ -64,30 +64,31 @@ $redirectTo = function ($target) {
     return redirect()->route($name, $param ? ['service' => $param] : [], 301);
 };
 
-// روابط صريحة (بدون شرطة لاحقة) — سريعة ومباشرة
-foreach ($map as $old => $target) {
-    Route::get('/'.$old, fn () => $redirectTo($target));
-}
-
 // أقسام كاملة من الموقع القديم (بورتفوليو/تصنيفات/وسوم/مؤلف) ⇐ أقرب صفحة
 Route::get('/projects/{any?}', fn () => redirect()->route('gallery', [], 301))->where('any', '.*');
 Route::get('/category/{any?}', fn () => redirect()->route('blog.index', [], 301))->where('any', '.*');
 Route::get('/author/{any?}', fn () => redirect()->route('home', [], 301))->where('any', '.*');
 
 /*
- | الاحتياطي: يغطّي النسخة المنتهية بشرطة (/الرابط/) لكل ما سبق، إضافةً
- | للمقالات القديمة المطابقة بحقل source_url — فإن وُجدت حُوِّلت لصفحتها
- | الجديدة، وإلا استمرّت لصفحة 404. المعالجة في PHP تضمن ترميز UTF-8 سليماً.
+ | الاحتياطي يعالج كل روابط الموقع القديم (بشرطة أو بدونها) بترميز UTF-8 سليم.
+ | الترتيب مهم: المقال المنقول له الأولوية على خريطة الصفحات حتى لا يُختطف
+ | رابط مقال (مثل «صيانة-مصاعد») إلى صفحة خدمة.
  */
 Route::fallback(function (Request $request) use ($map, $redirectTo) {
     $path = rawurldecode(trim($request->path(), '/'));
 
-    // 1) صفحات الموقع القديم (تشمل النسخة المنتهية بشرطة)
+    // 1) مقال منقول رابطه مطابق للـslug (الأولوية للمحتوى)
+    $post = Post::query()->where('slug', $path)->where('is_active', true)->first();
+    if ($post) {
+        return redirect()->route('blog.show', $post, 301);
+    }
+
+    // 2) صفحات الموقع القديم (تشمل النسخة المنتهية بشرطة)
     if (isset($map[$path])) {
         return $redirectTo($map[$path]);
     }
 
-    // 2) المقالات القديمة: مطابقة مقطع المسار داخل source_url
+    // 3) مقال قديم بِslug مختلف — مطابقة مقطع المسار داخل source_url
     $post = Post::query()
         ->whereNotNull('source_url')
         ->where('source_url', 'like', '%/'.$path.'%')
