@@ -8,6 +8,8 @@
   /* الهوية — مأخوذة حرفياً من ملف الهوية (لوجو كنوز.pdf) */
   --orange:#EA711C; --orange-2:#F18335; --orange-3:#C25A0F; --orange-tint:#FDF1E7;
   --ink:#14181E; --ink-2:#1D2229; --ink-3:#2A313B;
+  /* الكحلي — لون ثانوي للثيم (مصاعد + بطاقات مميّزة) */
+  --navy:#122238; --navy-2:#1B3255; --navy-3:#0E1B2E; --gold:#F3C169;
 
   /* الأسطح */
   --paper:#FFFFFF; --cream:#FBF7F2; --cream-2:#F5EFE6; --line:#EAE3D9; --line-2:#DED5C8;
@@ -231,45 +233,61 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
   width:4px;height:7px;border-radius:3px;background:var(--orange);animation:wheel 1.7s infinite}
 @keyframes wheel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(12px);opacity:0}100%{opacity:0}}
 
-/* ===== 8. بئر المصعد (الفيجوال) ===== */
+/* ===== 8. المصعد (الفيجوال) — لوحة كحلية ببئرين وأرقام أدوار وكبينتين برتقاليتين ===== */
 .shaft-wrap{position:relative;display:grid;justify-items:center;gap:18px;isolation:isolate}
-/* وهج برتقالي ثابت خلف البئر + حلقة منقّطة ثابتة (بلا دوران — أداء) */
+/* وهج برتقالي ثابت خلف اللوحة */
 .shaft-wrap::before{content:"";position:absolute;z-index:-1;top:50%;left:50%;
-  width:min(480px,108%);aspect-ratio:1;translate:-50% -50%;border-radius:50%;
-  background:radial-gradient(closest-side,rgba(233,113,28,.30),rgba(233,113,28,.08) 56%,transparent 76%)}
-/* بئران متجاوران زي مصعد إيوان */
-.shafts{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px;
-  width:min(360px,90%);aspect-ratio:.84}
-.shaft{position:relative;border-radius:var(--r-lg);overflow:hidden;
-  background:linear-gradient(168deg,var(--ink-3) 0%,var(--ink) 100%);
-  border:1px solid rgba(255,255,255,.09);
-  box-shadow:var(--sh-3),inset 0 0 44px rgba(0,0,0,.45)}
-.shaft .rail{position:absolute;top:14px;bottom:14px;width:3px;border-radius:3px;
-  background:linear-gradient(180deg,transparent,rgba(234,113,28,.7),transparent);
-  box-shadow:0 0 12px rgba(234,113,28,.35)}
-.shaft .rail.a{inset-inline-start:30%}
-.shaft .rail.b{inset-inline-end:30%}
-/* كبينتان برتقاليتان — اليمنى تصعد واليسرى تنزل بتحرّك متعاكس */
-.cabin{position:absolute;inset-inline:0;margin-inline:auto;width:62%;height:24%;bottom:6%;
-  border-radius:var(--r-sm);overflow:hidden;
+  width:min(520px,116%);aspect-ratio:1;translate:-50% -50%;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(233,113,28,.28),rgba(233,113,28,.07) 58%,transparent 76%)}
+/* اللوحة الكحلية: عمود أرقام + بئران + عمود أرقام */
+.lift{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:stretch;
+  width:min(400px,92%);aspect-ratio:.95;padding:16px 12px;overflow:hidden;isolation:isolate;
+  background:linear-gradient(168deg,var(--navy-2) 0%,var(--navy) 58%,var(--navy-3) 100%);
+  border:1px solid rgba(255,255,255,.09);border-radius:24px;
+  box-shadow:var(--sh-3),inset 0 0 70px rgba(0,0,0,.5)}
+/* أعمدة أرقام الأدوار على الجانبين */
+.floors{display:flex;flex-direction:column;justify-content:space-between;gap:5px;z-index:2}
+.floors i{display:grid;place-items:center;width:30px;height:24px;border-radius:7px;font-style:normal;
+  font-size:.6rem;font-weight:800;color:rgba(255,255,255,.32);direction:ltr;
+  background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.floors i.on{color:var(--gold);background:rgba(243,193,105,.12);border-color:rgba(243,193,105,.4);
+  box-shadow:0 0 12px rgba(243,193,105,.3),inset 0 0 6px rgba(243,193,105,.15)}
+/* البئران + الفاصل الذهبي في المنتصف */
+.bay{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0;margin-inline:12px}
+.bay::before{content:"";position:absolute;top:5%;bottom:5%;left:50%;width:2px;translate:-50% 0;z-index:3;
+  background:linear-gradient(180deg,transparent,rgba(243,193,105,.55) 20%,rgba(243,193,105,.55) 80%,transparent);
+  box-shadow:0 0 10px rgba(243,193,105,.4)}
+.shaft{position:relative;overflow:hidden;
+  background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.34));
+  box-shadow:inset 0 0 30px rgba(0,0,0,.4)}
+/* خطوط أدوار خافتة داخل البئر (ثابتة — بلا حركة) */
+.shaft::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(180deg,transparent 0 calc(10% - 1px),rgba(255,255,255,.035) calc(10% - 1px) 10%)}
+/* الكبينة البرتقالية */
+.cabin{position:absolute;inset-inline:0;margin-inline:auto;width:74%;height:26%;bottom:5%;
+  border-radius:9px;overflow:hidden;
   background:linear-gradient(160deg,var(--orange-2),var(--orange) 52%,var(--orange-3));
-  border:1px solid rgba(255,255,255,.3);
-  box-shadow:0 0 0 1px rgba(233,113,28,.55),0 8px 26px rgba(233,113,28,.5),0 0 44px rgba(233,113,28,.32)}
-/* الداخل يظهر عند فتح البابين: جدار دافئ + ضوء سقف + مسند وخط أرضية */
+  border:1px solid rgba(255,255,255,.28);
+  box-shadow:0 0 0 1px rgba(233,113,28,.5),0 10px 26px rgba(233,113,28,.45),0 0 40px rgba(233,113,28,.28)}
+/* الداخل يظهر عند فتح البابين: جدار دافئ + ضوء سقف */
 .cabin::before{content:"";position:absolute;inset:0;
   background:
-    linear-gradient(180deg,transparent 80%,rgba(94,52,16,.55) 84%,transparent 90%),
-    linear-gradient(180deg,transparent 50%,rgba(150,92,44,.4) 52%,transparent 55%),
-    radial-gradient(95% 58% at 50% 4%,rgba(255,251,244,.9),rgba(255,228,197,.3) 55%,transparent 80%),
+    radial-gradient(95% 55% at 50% 6%,rgba(255,251,244,.9),rgba(255,228,197,.3) 55%,transparent 82%),
+    linear-gradient(180deg,transparent 78%,rgba(94,52,16,.5) 82%,transparent 90%),
     linear-gradient(180deg,#F6E1C8,#E7BF93)}
-/* عتبة علوية مضيئة ناعمة */
-.cabin::after{content:"";position:absolute;top:0;inset-inline:12%;height:3px;border-radius:0 0 4px 4px;
-  background:linear-gradient(90deg,transparent,#FFE7C4,transparent);z-index:3}
-/* البابان: برتقالي بلمعة رأسية وخيط ضوء عند حافة الالتقاء */
+/* ضوء علوي */
+.cabin::after{content:"";position:absolute;top:0;inset-inline:14%;height:4px;border-radius:0 0 5px 5px;z-index:4;
+  background:linear-gradient(90deg,transparent,#FFE7C4,transparent)}
+/* البابان مع قضيبين ذهبيين (مقبضان) */
 .cabin .cd{position:absolute;top:0;bottom:0;width:50.5%;z-index:2;
-  background:linear-gradient(105deg,#A94C0D 0%,#C85A10 40%,#DE6C15 52%,#B85210 70%,#9C440A 100%)}
-.cabin .cd.l{left:0;box-shadow:inset -1.5px 0 0 rgba(255,238,214,.6),inset 0 0 14px rgba(0,0,0,.25)}
-.cabin .cd.r{right:0;box-shadow:inset 1.5px 0 0 rgba(255,238,214,.6),inset 0 0 14px rgba(0,0,0,.25)}
+  background:linear-gradient(105deg,#A94C0D 0%,#C85A10 42%,#DE6C15 52%,#B85210 70%,#9C440A 100%)}
+.cabin .cd.l{left:0;box-shadow:inset -1.5px 0 0 rgba(255,238,214,.55)}
+.cabin .cd.r{right:0;box-shadow:inset 1.5px 0 0 rgba(255,238,214,.55)}
+.cabin .cd::before{content:"";position:absolute;top:24%;bottom:24%;width:5px;border-radius:3px;
+  background:linear-gradient(180deg,#FFDE9C,var(--gold) 45%,#D89A38);box-shadow:0 0 7px rgba(243,193,105,.6)}
+.cabin .cd.l::before{right:20%}
+.cabin .cd.r::before{left:20%}
 /* الكبينتان بنفس الحركة لكن بإزاحة نصف دورة فتتعاكسان (واحدة صاعدة والأخرى نازلة) */
 .cabin.up{animation:ride2 8s ease-in-out infinite}
 .cabin.up .cd.l{animation:cd2L 8s ease-in-out infinite}
@@ -280,7 +298,7 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
 /* صعود لأعلى البئر ثم نزول، بوقفتين. الحركة بنسبة ارتفاع الكبينة فلا تخرج عن البئر. */
 @keyframes ride2{
   0%,12%{transform:translateY(0)}
-  40%,60%{transform:translateY(-268%)}
+  40%,60%{transform:translateY(-250%)}
   88%,100%{transform:translateY(0)}
 }
 /* البابان يفتحان عند الوقفتين (أسفل وأعلى) ويُغلقان أثناء الحركة */
@@ -364,34 +382,45 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
 .card-img .card-bd{padding:30px 28px}
 .card-img::before{z-index:3}
 
-/* ===== 10.6 بطاقات القطاعات بصور وتدرّج ===== */
+/* ===== 10.7 بطاقة الخدمة المميّزة (ثيم كحلي) ===== */
+.card.card-featured{border-color:var(--navy);box-shadow:0 22px 50px rgba(14,27,46,.28);z-index:2}
+.card-featured::before{transform:scaleX(1)} /* الشريط البرتقالي ممتد دائماً */
+.card-featured .card-bd{background:linear-gradient(172deg,var(--navy-2),var(--navy) 62%,var(--navy-3))}
+.card-featured .card-bd h3{color:#fff}
+.card-featured .card-bd p{color:rgba(255,255,255,.8)}
+.card-featured .card-bd .feats li{color:rgba(255,255,255,.86)}
+.card-featured .card-bd .feats li::before{background:var(--orange-2);opacity:1}
+.card-featured .card-bd .link-or{color:var(--orange-2)}
+.card-featured .card-badge{position:absolute;top:14px;inset-inline-end:14px;z-index:4;
+  display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:800;color:#fff;
+  background:var(--orange);border-radius:var(--r-pill);padding:6px 13px;
+  box-shadow:0 8px 20px rgba(233,113,28,.45)}
+
+/* ===== 10.6 بطاقات القطاعات: صورة واضحة أعلى + لوحة كحلية ===== */
 .sector-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.sector{position:relative;border-radius:var(--r-lg);overflow:hidden;min-height:400px;
-  display:flex;align-items:flex-end;isolation:isolate;
+.sector{position:relative;border-radius:var(--r-lg);overflow:hidden;isolation:isolate;
+  display:flex;flex-direction:column;
+  background:linear-gradient(172deg,var(--navy-2),var(--navy) 62%,var(--navy-3));
+  border:1.5px solid rgba(30,51,85,.55);
   transition:transform var(--t),box-shadow var(--t)}
-.sector:hover{transform:translateY(-8px);box-shadow:var(--sh-3)}
-/* تمويه خفيف يخفي تبكسل الصور منخفضة الدقة عند التكبير */
-.sector .sector-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
-  filter:blur(1.5px) saturate(1.15);transform:scale(1.06);
-  transition:transform 1s var(--ease)}
-.sector:hover .sector-bg{transform:scale(1.12)}
-/* الصور المتاحة منخفضة الدقة (≈225px)، فالطبقة معتمة بما يكفي ليبقى النص مقروءاً دائماً.
-   نستخدم ::before لا ::after لأن وهج الماجنت يحجز ::after. */
-.sector::before{content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(180deg,rgba(20,24,30,.55) 0%,rgba(20,24,30,.8) 42%,rgba(20,24,30,.96) 100%);
-  transition:background var(--t)}
-.sector:hover::before{background:linear-gradient(180deg,rgba(233,113,28,.42) 0%,rgba(20,24,30,.84) 45%,rgba(20,24,30,.97) 100%)}
-.sector .s-num{position:absolute;top:22px;inset-inline-start:26px;font-size:3.4rem;font-weight:800;
-  color:transparent;-webkit-text-stroke:1.6px rgba(255,255,255,.45);line-height:1;direction:ltr;
-  transition:-webkit-text-stroke-color var(--t)}
-.sector:hover .s-num{-webkit-text-stroke-color:var(--orange-2)}
-.sector-in{padding:30px 28px;width:100%}
-.sector-in .ic{width:54px;height:54px;border-radius:16px;background:rgba(233,113,28,.9);
-  display:grid;place-items:center;margin-bottom:16px;transition:transform var(--t)}
+.sector:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(14,27,46,.34)}
+/* صورة القطاع واضحة (بلا تمويه) في أعلى البطاقة */
+.sector-art{position:relative;height:212px;overflow:hidden;flex-shrink:0}
+.sector-art img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.sector:hover .sector-art img{transform:scale(1.07)}
+/* تدرّج خفيف عند حافة الصورة السفلية ليمتزج باللوحة الكحلية */
+.sector-art::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 58%,rgba(18,34,56,.55) 100%)}
+.sector-in{padding:0 26px 30px;width:100%}
+/* الأيقونة البرتقالية تتراكب على حافة الصورة كشارة */
+.sector-in .ic{width:54px;height:54px;border-radius:16px;background:var(--orange);
+  display:grid;place-items:center;margin:-27px 0 16px;position:relative;z-index:2;
+  border:3px solid var(--navy);box-shadow:0 12px 26px rgba(233,113,28,.42);
+  transition:transform var(--t)}
 .sector-in .ic svg{width:26px;height:26px;color:#fff}
 .sector:hover .sector-in .ic{transform:scale(1.1) rotate(-6deg)}
-.sector-in h3{color:#fff;font-size:1.45rem;margin-bottom:8px}
-.sector-in p{color:rgba(255,255,255,.82);font-size:.93rem}
+.sector-in h3{color:#fff;font-size:1.4rem;margin-bottom:8px}
+.sector-in p{color:rgba(255,255,255,.8);font-size:.93rem}
 
 /* ===== 11. شريط الإحصائيات الكحلي ===== */
 .stats-band{background:var(--ink-2);position:relative;overflow:hidden}
@@ -602,41 +631,26 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
   border:2px solid rgba(37,211,102,.6);animation:waRing 2.6s ease-out infinite}
 
 /* ===== 19. هيرو الصفحات الداخلية ===== */
-/* خلفية ثابتة (بلا حركة دائمة) + محتوى فعلي: عنوان ووصف ومختصرات ومسار. */
-.page-hero{position:relative;padding:148px 0 62px;overflow:hidden;isolation:isolate;
-  background:linear-gradient(140deg,#FFFDFB 0%,var(--cream) 40%,var(--cream-2) 72%,#FCE7D5 100%);
-  border-bottom:2px solid transparent;
-  border-image:linear-gradient(90deg,var(--orange-3),var(--orange),#FFC078,var(--orange),var(--orange-3)) 1}
-.page-hero .ph-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.16;
-  z-index:-4;filter:grayscale(.3) saturate(1.2)}
-.page-hero::before{content:"";position:absolute;inset:0;z-index:-3;
-  background:linear-gradient(180deg,rgba(251,247,242,.9),rgba(251,247,242,.8))}
-/* شبكة + وهج ثابتان — متمركزان تحت النص */
-.ph-fx{position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:
-    linear-gradient(rgba(29,34,41,.05) 1px,transparent 1px) 0 0/54px 54px,
-    linear-gradient(90deg,rgba(29,34,41,.05) 1px,transparent 1px) 0 0/54px 54px,
-    radial-gradient(680px 440px at 50% 0,rgba(233,113,28,.17),transparent 68%);
-  mask-image:radial-gradient(130% 120% at 50% 28%,#000 42%,transparent 84%);
-  -webkit-mask-image:radial-gradient(130% 120% at 50% 28%,#000 42%,transparent 84%)}
-.page-hero .wrap{position:relative}
-/* المحتوى في الوسط وأكبر حجماً حتى لا يبدو القسم فارغاً */
-.page-hero .ph-in{max-width:840px;margin-inline:auto;text-align:center;
-  display:flex;flex-direction:column;align-items:center}
-.page-hero .eyebrow{background:rgba(255,255,255,.8);border:1px solid rgba(233,113,28,.28);
-  border-radius:var(--r-pill);padding:8px 18px 8px 14px;box-shadow:0 6px 18px rgba(233,113,28,.13);
-  backdrop-filter:blur(8px)}
+/* بنفس شكل هيرو الرئيسية: خلفية دافئة نظيفة + وهج برتقالي + بئر مصعد متحرك بجانب النص. */
+.page-hero{position:relative;padding:150px 0 80px;overflow:hidden;isolation:isolate;
+  background:linear-gradient(165deg,#FFFFFF 0%,#FFFAF4 52%,#FCEEDF 100%)}
+.ph-grid{position:relative;display:grid;grid-template-columns:1.06fr .94fr;
+  gap:clamp(36px,6vw,80px);align-items:center;width:100%}
+.ph-copy{text-align:start}
+.page-hero .eyebrow{background:rgba(255,255,255,.72);border:1px solid rgba(233,113,28,.28);
+  border-radius:var(--r-pill);padding:8px 18px 8px 14px;margin-bottom:22px;
+  box-shadow:0 6px 18px rgba(233,113,28,.13);backdrop-filter:blur(8px)}
 .page-hero .eyebrow::before{width:9px;height:9px;border-radius:50%;background:var(--orange);
   box-shadow:0 0 0 0 rgba(233,113,28,.6);animation:pingDot 2.2s ease-out infinite}
-.page-hero h1{font-size:clamp(2.4rem,5.2vw,4.1rem);line-height:1.12;margin:12px 0 18px;position:relative;
-  max-width:17ch;padding-bottom:16px}
-.page-hero h1::after{content:"";position:absolute;bottom:0;inset-inline:0;margin-inline:auto;
+.page-hero h1{font-size:clamp(2.3rem,4.6vw,3.7rem);line-height:1.14;margin:0 0 20px;position:relative;
+  max-width:18ch;padding-bottom:18px}
+.page-hero h1::after{content:"";position:absolute;bottom:0;inset-inline-start:0;
   width:86px;height:4px;border-radius:4px;
   background:linear-gradient(90deg,var(--orange-3),var(--orange),#FFC078)}
-.page-hero .lead{font-size:clamp(1.05rem,1.7vw,1.32rem);line-height:1.85;color:var(--tx-2);
-  max-width:62ch;margin:0 auto 24px}
-/* مختصرات تملأ الترويسة بدل تركها فارغة */
-.ph-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:24px}
+.page-hero .lead{font-size:clamp(1.05rem,1.7vw,1.28rem);line-height:1.9;color:var(--tx-2);
+  max-width:56ch;margin:0 0 26px}
+/* مختصرات بمحاذاة النص */
+.ph-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
 .ph-tags span{display:inline-flex;align-items:center;gap:9px;font-size:.86rem;font-weight:700;
   color:var(--tx);background:rgba(255,255,255,.82);border:1px solid rgba(233,113,28,.28);
   border-radius:var(--r-pill);padding:8px 16px;box-shadow:var(--sh)}
@@ -647,6 +661,8 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
 .crumbs a{transition:color .2s}
 .crumbs a:hover{color:var(--orange-3)}
 .crumbs b{color:var(--orange-3);font-weight:700}
+/* القسم التالي مباشرةً للترويسة بلون بارد ليتباين مع الهيرو الدافئ (بكل الصفحات) */
+.page-hero + .sec{background:#EDF1F6}
 
 /* ===== 20. نبذة عنا ===== */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,6vw,72px);align-items:center}
@@ -867,7 +883,9 @@ textarea:focus-visible,summary:focus-visible{outline:3px solid var(--orange);out
   .hdr-phone{display:none}
   .hero-grid{grid-template-columns:1fr;gap:52px}
   .hero{min-height:auto;padding-top:120px}
-  .shaft-wrap{order:-1}
+  .hero .shaft-wrap{order:-1}
+  .ph-grid{grid-template-columns:1fr;gap:44px}
+  .page-hero{padding:120px 0 60px}
   .cards,.feat-grid,.proj-grid,.quotes,.art-grid,.sector-grid{grid-template-columns:repeat(2,1fr)}
   .gal-grid{grid-template-columns:repeat(3,1fr)}
   .sector{min-height:340px}
@@ -946,7 +964,8 @@ textarea:focus-visible,summary:focus-visible{outline:3px solid var(--orange);out
   .hero .lead{margin-bottom:26px}
   .hero-cta{margin-bottom:32px}
   /* البئران شبكة مرنة: نُحجّم الحاوية لا كل بئر — وإلا فاضا خارج الشاشة */
-  .shafts{width:min(300px,82vw);aspect-ratio:.88;gap:11px}
+  .lift{width:min(340px,88vw);aspect-ratio:1;padding:13px 9px}
+  .floors i{width:26px;height:21px;font-size:.55rem}
   .shaft-wrap{gap:14px;padding-bottom:8px}
   .shaft-chip{position:static;margin-top:4px;bottom:auto;inset-inline-end:auto}
   .hero-stats{gap:0;justify-content:space-between}

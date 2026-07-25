@@ -21,19 +21,7 @@
         @endforeach
       </div>
     </div>
-    <div class="shaft-wrap rv">
-      <div class="shafts">
-        <div class="shaft">
-          <span class="rail a"></span><span class="rail b"></span>
-          <div class="cabin up"><span class="cd l"></span><span class="cd r"></span></div>
-        </div>
-        <div class="shaft">
-          <span class="rail a"></span><span class="rail b"></span>
-          <div class="cabin down"><span class="cd l"></span><span class="cd r"></span></div>
-        </div>
-      </div>
-      <div class="shaft-chip"><x-icon name="clock" /><div><b>24/7</b><small>استجابة لأعطال الطوارئ</small></div></div>
-    </div>
+    <x-site.elevator />
   </div>
   <div class="scroll-cue"><span class="mouse"></span><span>انتقل للأسفل</span></div>
 </section>

@@ -10,7 +10,7 @@
       كل ما نقوم به يدور حول المصاعد: نُركّبها وفق الأصول منذ البداية، ونصونها لتبقى آمنة، ونُحدّث القديم منها بدلاً من استبداله.
     </x-sec-head>
     <div class="cards">
-      @foreach($services as $service)<x-site.service-card :service="$service" />@endforeach
+      @foreach($services as $service)<x-site.service-card :service="$service" :featured="$loop->iteration === 2" />@endforeach
     </div>
   </div>
 </section>

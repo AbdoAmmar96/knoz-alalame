@@ -1,7 +1,10 @@
-@props(['service'])
+@props(['service', 'featured' => false])
 
-<article class="card card-img rv">
-  <div class="card-art"><img src="{{ img($service->image) }}" alt="{{ $service->title }}" loading="lazy" /></div>
+<article @class(['card', 'card-img', 'card-featured' => $featured, 'rv'])>
+  <div class="card-art">
+    <img src="{{ img($service->image) }}" alt="{{ $service->title }}" loading="lazy" />
+    @if($featured)<span class="card-badge">الأكثر طلباً</span>@endif
+  </div>
   <div class="card-bd">
     <h3>{{ $service->title }}</h3><p>{{ $service->body }}</p>
     @if($service->features)
