@@ -51,6 +51,8 @@ h1,h2,h3,h4{line-height:1.22;font-weight:800;color:var(--tx);letter-spacing:-.01
 .sec-tight{padding-block:clamp(44px,6vw,72px)}
 .bg-cream{background:var(--cream)}
 .bg-cream2{background:var(--cream-2)}
+/* خلفية باردة فاتحة تفصل القسم عن الهيرو بوضوح (بأسلوب إيوان) */
+.bg-soft{background:#EDF1F6}
 .bg-ink{background:var(--ink-2);color:var(--tx-d2)}
 .bg-ink h2,.bg-ink h3,.bg-ink h4{color:#fff}
 .center{text-align:center}
@@ -131,6 +133,32 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
 .nav a:hover{color:var(--tx)}
 .nav a:hover::after,.nav a.active::after{width:100%}
 .nav a.active{color:var(--orange-3);font-weight:700}
+/* قائمة الخدمات المنسدلة عند المرور */
+.nav .has-sub{position:relative}
+.nav .has-sub>a{display:inline-flex;align-items:center;gap:5px}
+.nav .has-sub .chev{width:13px;height:13px;transition:transform .25s var(--ease)}
+.nav .has-sub:hover .chev{transform:rotate(180deg)}
+/* .nav .subnav (خصوصية أعلى من .nav ul) وإلا يرثه display:flex فيصير أفقياً */
+.nav .subnav{position:absolute;top:100%;inset-inline-start:0;min-width:230px;z-index:110;
+  background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-2);
+  padding:8px;margin-top:6px;display:grid;grid-template-columns:1fr;gap:2px;list-style:none;
+  opacity:0;visibility:hidden;transform:translateY(8px);
+  transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s}
+/* جسر شفاف يمنع انغلاق القائمة عند عبور المؤشر للأسفل */
+.nav .subnav::before{content:"";position:absolute;top:-10px;inset-inline:0;height:10px}
+.nav .has-sub:hover .subnav{opacity:1;visibility:visible;transform:translateY(0)}
+.nav .subnav li a{display:block;padding:10px 14px;border-radius:var(--r-sm);font-size:.9rem;font-weight:600;
+  color:var(--tx-2);white-space:nowrap}
+.nav .subnav li a::after{display:none}
+.nav .subnav li a:hover{background:var(--orange-tint);color:var(--orange-3)}
+.nav .subnav .subnav-all{margin-top:4px;padding-top:6px;border-top:1px solid var(--line)}
+.nav .subnav .subnav-all a{color:var(--orange-3);font-weight:700}
+/* روابط الخدمات الفرعية داخل الدرج (الموبايل) */
+.drawer-sub{display:grid;gap:2px;padding:6px 0 10px;margin-inline-start:6px;
+  border-inline-start:2px solid var(--line)}
+.drawer-sub a{padding:9px 14px;font-size:.95rem;font-weight:600;color:var(--tx-2);
+  border-radius:var(--r-sm);transition:color .2s,background .2s}
+.drawer-sub a:hover{color:var(--orange-3);background:var(--orange-tint)}
 .hdr-cta{display:flex;align-items:center;gap:12px}
 .hdr-phone{display:flex;align-items:center;gap:9px;font-weight:700;font-size:.92rem;color:var(--tx);
   border:1.5px solid var(--line-2);border-radius:var(--r-pill);padding:9px 18px;direction:ltr;
@@ -168,18 +196,12 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
 /* خلفية ثابتة تماماً (لا حركة دائمة): تدرّج دافئ + شبكة خفيفة + وهج برتقالي. */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;isolation:isolate;
   padding-top:130px;padding-bottom:70px;overflow:hidden;
-  background:linear-gradient(140deg,#FFFDFB 0%,var(--cream) 42%,var(--cream-2) 74%,#FCE7D5 100%)}
-/* شبكة معمارية خفيفة ثابتة */
-.hero::before{content:"";position:absolute;inset:0;z-index:-3;pointer-events:none;opacity:.5;
-  background:
-    linear-gradient(rgba(29,34,41,.045) 1px,transparent 1px) 0 0/58px 58px,
-    linear-gradient(90deg,rgba(29,34,41,.045) 1px,transparent 1px) 0 0/58px 58px;
-  mask-image:radial-gradient(120% 90% at 50% 40%,#000 30%,transparent 78%);
-  -webkit-mask-image:radial-gradient(120% 90% at 50% 40%,#000 30%,transparent 78%)}
+  background:linear-gradient(165deg,#FFFFFF 0%,#FFFAF4 52%,#FCEEDF 100%)}
+/* خلفية نظيفة بلا شبكة أو مربعات — وهج برتقالي ناعم فقط */
 .hero-glow{position:absolute;inset:0;pointer-events:none;z-index:-4;
   background:
-    radial-gradient(720px 520px at 84% 2%,rgba(233,113,28,.20),transparent 60%),
-    radial-gradient(600px 460px at 6% 98%,rgba(233,113,28,.10),transparent 60%)}
+    radial-gradient(760px 560px at 86% 0%,rgba(233,113,28,.18),transparent 58%),
+    radial-gradient(560px 440px at 4% 100%,rgba(233,113,28,.09),transparent 60%)}
 .hero-grid{position:relative;display:grid;grid-template-columns:1.06fr .94fr;
   gap:clamp(36px,6vw,80px);align-items:center;width:100%}
 .hero h1{margin-bottom:22px}
@@ -213,11 +235,8 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
 .shaft-wrap{position:relative;display:grid;justify-items:center;gap:18px;isolation:isolate}
 /* وهج برتقالي ثابت خلف البئر + حلقة منقّطة ثابتة (بلا دوران — أداء) */
 .shaft-wrap::before{content:"";position:absolute;z-index:-1;top:50%;left:50%;
-  width:min(480px,106%);aspect-ratio:1;translate:-50% -50%;border-radius:50%;
+  width:min(480px,108%);aspect-ratio:1;translate:-50% -50%;border-radius:50%;
   background:radial-gradient(closest-side,rgba(233,113,28,.30),rgba(233,113,28,.08) 56%,transparent 76%)}
-.shaft-wrap::after{content:"";position:absolute;z-index:-1;top:50%;left:50%;
-  width:min(420px,92%);aspect-ratio:1;translate:-50% -50%;border-radius:50%;
-  border:1.5px dashed rgba(233,113,28,.28)}
 /* بئران متجاوران زي مصعد إيوان */
 .shafts{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px;
   width:min(360px,90%);aspect-ratio:.84}

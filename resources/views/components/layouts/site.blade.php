@@ -43,7 +43,22 @@
     <nav class="nav">
       <ul>
         @foreach(nav_links() as $link)
-          <li><a href="{{ $link['url'] }}" @class(['active' => $link['active']])>{{ $link['label'] }}</a></li>
+          @if($link['key'] === 'services' && $footerServices->isNotEmpty())
+            <li class="has-sub">
+              <a href="{{ $link['url'] }}" @class(['active' => $link['active']])>
+                {{ $link['label'] }}
+                <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </a>
+              <ul class="subnav">
+                @foreach($footerServices as $service)
+                  <li><a href="{{ route('services.show', $service) }}">{{ $service->title }}</a></li>
+                @endforeach
+                <li class="subnav-all"><a href="{{ route('services') }}">كل الخدمات</a></li>
+              </ul>
+            </li>
+          @else
+            <li><a href="{{ $link['url'] }}" @class(['active' => $link['active']])>{{ $link['label'] }}</a></li>
+          @endif
         @endforeach
       </ul>
     </nav>
@@ -65,6 +80,13 @@
     <nav>
       @foreach(nav_links() as $i => $link)
         <a href="{{ $link['url'] }}" @class(['active' => $link['active']])>{{ $link['label'] }} <span>{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span></a>
+        @if($link['key'] === 'services' && $footerServices->isNotEmpty())
+          <div class="drawer-sub">
+            @foreach($footerServices as $service)
+              <a href="{{ route('services.show', $service) }}">{{ $service->title }}</a>
+            @endforeach
+          </div>
+        @endif
       @endforeach
     </nav>
     <div class="drawer-foot">

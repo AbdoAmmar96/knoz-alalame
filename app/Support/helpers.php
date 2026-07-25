@@ -64,6 +64,7 @@ if (! function_exists('nav_links')) {
         ];
 
         return array_map(fn ($l) => [
+            'key' => $l['route'],
             'label' => $l['label'],
             'url' => route($l['route']),
             'active' => request()->is($l['pattern']),
