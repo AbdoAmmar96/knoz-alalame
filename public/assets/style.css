@@ -586,6 +586,25 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
   background:linear-gradient(90deg,var(--orange-2),var(--orange-3));
   transform:scaleX(.3);transform-origin:inline-end;transition:transform .45s var(--ease)}
 .quote:hover::before{transform:scaleX(1)}
+
+/* ===== 15.5 عملاؤنا: بطاقات مشاريع حقيقية ===== */
+.clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.client-card{position:relative;display:flex;align-items:flex-start;gap:14px;
+  background:#fff;border:1.5px solid var(--line);border-radius:var(--r);padding:20px 18px;
+  transition:transform var(--t),box-shadow var(--t),border-color var(--t)}
+.client-card:hover{transform:translateY(-5px);border-color:var(--orange);box-shadow:var(--sh-2)}
+.client-ic{flex-shrink:0;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;
+  background:linear-gradient(145deg,var(--orange-2),var(--orange-3));color:#fff;
+  box-shadow:0 6px 16px rgba(233,113,28,.32)}
+.client-ic svg{width:23px;height:23px}
+.client-bd{display:flex;flex-direction:column;gap:4px;min-width:0;padding-inline-end:16px}
+.client-bd b{font-size:1rem;color:var(--tx);font-weight:800;line-height:1.35}
+.client-work{font-size:.85rem;color:var(--orange-3);font-weight:700}
+.client-area{display:inline-flex;align-items:center;gap:5px;font-size:.82rem;color:var(--tx-2)}
+.client-area svg{width:14px;height:14px;color:var(--tx-3);flex-shrink:0}
+.client-check{position:absolute;top:14px;inset-inline-end:14px;width:22px;height:22px;border-radius:50%;
+  background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 3px 9px rgba(37,211,102,.4)}
+.client-check svg{width:13px;height:13px}
 .quote .qm{color:var(--orange);opacity:.55}
 .quote .who b{display:block;font-size:.95rem;color:var(--tx);line-height:1.4}
 .quote .who small{font-size:.8rem;color:var(--tx-3)}
@@ -922,6 +941,7 @@ textarea:focus-visible,summary:focus-visible{outline:3px solid var(--orange);out
   .page-hero{padding:120px 0 56px}
   .proj-detail{grid-template-columns:1fr;gap:26px}
   .cards,.feat-grid,.proj-grid,.quotes,.art-grid,.sector-grid{grid-template-columns:repeat(2,1fr)}
+  .clients-grid{grid-template-columns:repeat(2,1fr)}
   .gal-grid{grid-template-columns:repeat(3,1fr)}
   .sector{min-height:340px}
   .proc-steps{grid-template-columns:repeat(3,1fr);row-gap:36px}
@@ -934,6 +954,7 @@ textarea:focus-visible,summary:focus-visible{outline:3px solid var(--orange);out
   .stats-grid{grid-template-columns:repeat(2,1fr);gap:12px}
   .stats-grid .stat{padding:18px 10px}
   .cards,.cards-2,.feat-grid,.proj-grid,.quotes,.art-grid,.sector-grid{grid-template-columns:1fr;gap:16px}
+  .clients-grid{grid-template-columns:1fr}
   .sector{min-height:290px}
   .sector-in{padding:24px 22px}
   .sector-in h3{font-size:1.3rem}

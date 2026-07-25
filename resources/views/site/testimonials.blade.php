@@ -15,6 +15,17 @@
   </div>
 </section>
 
+@if($clients->isNotEmpty())
+<section class="sec bg-cream">
+  <div class="wrap">
+    <x-sec-head center eyebrow="عملاؤنا" title="عملاء نفخر" or="بخدمتهم">
+      مشاريع تركيب حقيقية نفّذناها في الرياض لعملاء من الأفراد والشركات والجهات — سكني وتجاري وطبي.
+    </x-sec-head>
+    <x-site.clients :clients="$clients" />
+  </div>
+</section>
+@endif
+
 <x-site.stats-band :stats="$stats" :image="setting('hero_image_gallery')" />
 
 <x-site.cta-band />

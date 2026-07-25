@@ -127,6 +127,7 @@ class SiteController extends Controller
         return view('site.testimonials', [
             'seo' => Seo::for('testimonials', ['crumbs' => ['آراء العملاء' => route('testimonials')]]),
             'testimonials' => Testimonial::live(),
+            'clients' => collect(config('clients.list', [])),
             'stats' => Stat::live(),
         ]);
     }
