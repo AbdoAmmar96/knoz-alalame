@@ -22,17 +22,16 @@
 @endforeach
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('assets/style.css') }}?v={{ filemtime(public_path('assets/style.css')) }}" />
 </head>
 <body>
 
 <div id="pre" aria-hidden="true">
-  <div class="door l"><div class="lat"><span></span><span></span><span></span><span></span><span></span></div></div>
-  <div class="door r"><div class="lat"><span></span><span></span><span></span><span></span><span></span></div></div>
+  <div class="door l"></div>
+  <div class="door r"></div>
   <div class="hud">
     <div class="plate"><img src="{{ asset('logo-white.png') }}" alt="{{ setting('site_name') }}" /></div>
-    <div class="led"><span class="tri"></span><span class="digits"><i>01</i><i>02</i><i>03</i><i>04</i><i>05</i></span></div>
   </div>
 </div>
 

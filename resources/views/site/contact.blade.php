@@ -1,6 +1,8 @@
 <x-layouts.site :seo="$seo">
 
-<x-site.page-hero title="تواصل معنا" eyebrow="تواصل" :image="setting('hero_image_contact')" />
+<x-site.page-hero title="تواصل معنا" eyebrow="تواصل" :image="setting('hero_image_contact')"
+  lead="اطلب عرض سعر أو معاينة مجانية لمصعدك في الرياض. اترك بياناتك ويتواصل معك مهندس خلال ساعات العمل، أو تواصل مباشرةً عبر الهاتف والواتساب."
+  :tags="['معاينة مجانية', 'اتصال مباشر', 'واتساب']" />
 
 <section class="sec">
   <div class="wrap">
@@ -38,7 +40,7 @@
           </p>
         @endif
 
-        <form method="POST" action="{{ route('contact.store') }}" id="quote-form">
+        <form method="POST" action="{{ route('contact.store') }}" id="quote-form" data-wa="{{ setting('whatsapp') }}">
           @csrf
           <div class="f-row">
             <div class="f-field">
@@ -68,7 +70,10 @@
           </div>
           {{-- مصيدة السبام: حقل مخفي لا يملؤه إلا الروبوت --}}
           <input type="text" name="website" value="" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
-          <button type="submit" class="btn btn-primary">أرسل الطلب <x-icon name="arrow" /></button>
+          <div class="btn-row" style="margin-top:8px">
+            <button type="submit" class="btn btn-primary">أرسل الطلب <x-icon name="arrow" /></button>
+            <button type="button" id="quote-wa" class="btn btn-ghost"><x-icon name="whatsapp" /> إرسال عبر واتساب</button>
+          </div>
         </form>
       </div>
     </div>

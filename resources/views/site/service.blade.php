@@ -1,6 +1,8 @@
 <x-layouts.site :seo="$seo">
 
-<x-site.page-hero :title="$service->title" eyebrow="خدماتنا" :image="$service->image" :crumb="$service->title" />
+<x-site.page-hero :title="$service->title" eyebrow="خدماتنا" :image="$service->image" :crumb="$service->title"
+  :lead="$service->body"
+  :tags="$service->features ? array_slice($service->features, 0, 3) : ['معاينة مجانية', 'ضمان مكتوب', 'قطع غيار أصلية']" />
 
 <section class="sec">
   <div class="wrap about-grid">

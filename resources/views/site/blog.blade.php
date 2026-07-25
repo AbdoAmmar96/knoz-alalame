@@ -1,6 +1,8 @@
 <x-layouts.site :seo="$seo">
 
-<x-site.page-hero title="المقالات" eyebrow="المدوّنة" :image="setting('hero_image_blog')" />
+<x-site.page-hero title="المقالات" eyebrow="المدوّنة" :image="setting('hero_image_blog')"
+  lead="مقالات تشرح صيانة المصاعد وتركيبها وأنواعها وأسعارها في الرياض، ونصائح عملية لأصحاب المباني تساعدك على اتخاذ القرار الصحيح لمصعدك."
+  :tags="['صيانة', 'تركيب', 'تحديث']" />
 
 <section class="sec">
   <div class="wrap">

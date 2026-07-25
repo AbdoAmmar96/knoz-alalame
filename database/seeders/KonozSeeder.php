@@ -143,6 +143,7 @@ class KonozSeeder extends Seeder
                 [
                     'title' => $row['title'],
                     'excerpt' => $row['excerpt'],
+                    'body' => $row['body'] ?? null,
                     'tag' => $row['tag'],
                     'image' => $row['image'],
                     'source_url' => $row['source_url'] ?? null,

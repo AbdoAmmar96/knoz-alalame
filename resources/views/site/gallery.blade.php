@@ -1,6 +1,8 @@
 <x-layouts.site :seo="$seo">
 
-<x-site.page-hero title="أعمالنا" eyebrow="المشاريع" :image="setting('hero_image_gallery')" />
+<x-site.page-hero title="أعمالنا" eyebrow="المشاريع" :image="setting('hero_image_gallery')"
+  lead="نماذج من المصاعد التي رّكبناها وحدّثناها في الرياض: أبراج سكنية، فنادق ومراكز تجارية، مصانع ومستودعات، وفلل خاصة — أعمال حقيقية تتحدّث عن جودتنا."
+  :tags="['سكني', 'تجاري', 'صناعي']" />
 
 <section class="sec">
   <div class="wrap">

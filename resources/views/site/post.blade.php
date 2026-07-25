@@ -1,14 +1,13 @@
 <x-layouts.site :seo="$seo">
 
-<x-site.page-hero :title="$post->title" :eyebrow="$post->tag" :image="$post->image" :crumb="$post->title" />
+<x-site.page-hero :title="$post->title" :eyebrow="$post->tag" :image="$post->image" :crumb="$post->title"
+  :lead="$post->excerpt" :tags="$post->tag ? [$post->tag] : []" />
 
 <section class="sec">
   <div class="wrap">
     <article class="article rv">
       @if($post->excerpt)<p class="lead">{{ $post->excerpt }}</p>@endif
-      @foreach(preg_split("/\n{2,}/", (string) $post->body) as $paragraph)
-        @if(trim($paragraph) !== '')<p>{{ $paragraph }}</p>@endif
-      @endforeach
+      {!! $post->body_html !!}
       <div class="btn-row" style="margin-top:32px">
         <a href="{{ route('contact') }}" class="btn btn-primary">اطلب معاينة مجانية</a>
         <a href="{{ route('blog.index') }}" class="btn btn-ghost">كل المقالات</a>

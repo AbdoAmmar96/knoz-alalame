@@ -3,12 +3,13 @@
   'use strict';
   var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* --- البريلودر: يفتح بعد اكتمال التحميل --- */
+  /* --- البريلودر: يفتح بسرعة ولا يحبس الزائر ---
+     لا ننتظر load (قد يتأخّر بسبب الصور/الخطوط): نفتح بمجرد جاهزية الـDOM
+     بلمسة تأخير بسيطة، مع شبكة أمان قصيرة جداً. */
   function openDoors() { document.body.classList.add('ready'); }
-  if (document.readyState === 'complete') setTimeout(openDoors, 220);
-  else addEventListener('load', function () { setTimeout(openDoors, 220); });
-  // شبكة أمان: لا نحبس الزائر لو تعثّر تحميل مورد
-  setTimeout(openDoors, 4200);
+  if (document.readyState !== 'loading') setTimeout(openDoors, 90);
+  else document.addEventListener('DOMContentLoaded', function () { setTimeout(openDoors, 90); });
+  setTimeout(openDoors, 1200);
 
   /* --- الهيدر عند التمرير + شريط تقدّم القراءة --- */
   var hdr = document.querySelector('.hdr');
@@ -128,18 +129,26 @@
     addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
   }
 
-  /* --- نموذج التواصل: يرسل عبر واتساب --- */
+  /* --- نموذج التواصل ---
+     يُرسَل فعلياً للخادم (يُسجَّل في اللوحة). زر "إرسال عبر واتساب" الاختياري
+     يفتح محادثة بالرقم الرسمي مسبوقة ببيانات النموذج — دون منع الحفظ. */
   var form = document.getElementById('quote-form');
   if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    var waNumber = form.getAttribute('data-wa') || '966503173407';
+    var buildMsg = function () {
       var d = new FormData(form);
-      var msg = 'طلب عرض سعر — كنوز العالم للمصاعد%0A'
-        + 'الاسم: ' + (d.get('name') || '-') + '%0A'
-        + 'الجوال: ' + (d.get('phone') || '-') + '%0A'
-        + 'الخدمة: ' + (d.get('service') || '-') + '%0A'
-        + 'التفاصيل: ' + (d.get('details') || '-');
-      open('https://wa.me/966503173407?text=' + msg, '_blank');
-    });
+      return encodeURIComponent(
+        'طلب عرض سعر — كنوز العالم للمصاعد\n'
+        + 'الاسم: ' + (d.get('name') || '-') + '\n'
+        + 'الجوال: ' + (d.get('phone') || '-') + '\n'
+        + 'الخدمة: ' + (d.get('service') || '-') + '\n'
+        + 'التفاصيل: ' + (d.get('details') || '-'));
+    };
+    var waBtn = document.getElementById('quote-wa');
+    if (waBtn) {
+      waBtn.addEventListener('click', function () {
+        open('https://wa.me/' + waNumber + '?text=' + buildMsg(), '_blank');
+      });
+    }
   }
 })();

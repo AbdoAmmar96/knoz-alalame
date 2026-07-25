@@ -1,6 +1,7 @@
 <x-layouts.site :seo="$seo">
 
-<x-site.page-hero title="خدماتنا" eyebrow="خدماتنا" :image="setting('hero_image_services')" />
+<x-site.page-hero title="خدماتنا" eyebrow="خدماتنا" :image="setting('hero_image_services')"
+  lead="كل ما يحتاجه مبناك من مصاعد في مكان واحد: تركيب مصاعد الركاب والبضائع والبانوراما، صيانة دورية واستجابة طوارئ، وتحديث المصاعد القديمة — بأعلى معايير الأمان وقطع غيار أصلية." />
 
 <section class="sec">
   <div class="wrap">

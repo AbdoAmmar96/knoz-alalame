@@ -1,6 +1,7 @@
 <x-layouts.site :seo="$seo">
 
-<x-site.page-hero title="نبذة عنا" eyebrow="نبذة عنا" :image="setting('hero_image_about')" />
+<x-site.page-hero title="نبذة عنا" eyebrow="نبذة عنا" :image="setting('hero_image_about')"
+  lead="شركة كنوز العالم للمصاعد بالرياض — تخصّص واحد منذ اليوم الأول: تركيب وصيانة وتحديث المصاعد للمباني السكنية والتجارية والصناعية، بفريق مهندسين وفنيين متخصصين وضمان مكتوب." />
 
 <section class="sec">
   <div class="wrap about-grid">

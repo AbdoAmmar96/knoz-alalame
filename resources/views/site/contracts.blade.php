@@ -1,6 +1,8 @@
 <x-layouts.site :seo="$seo">
 
-<x-site.page-hero title="عقود الصيانة السنوية" eyebrow="عقود الصيانة" :image="setting('hero_image_services')" />
+<x-site.page-hero title="عقود الصيانة السنوية" eyebrow="عقود الصيانة" :image="setting('hero_image_services')"
+  lead="عقد الصيانة السنوي يبقي مصعدك يعمل بأمان طوال العام: زيارات دورية مجدولة، أولوية في الطوارئ، خصم على قطع الغيار، وفحص سلامة سنوي موثّق."
+  :tags="['زيارات دورية', 'أولوية طوارئ', 'خصم قطع الغيار']" />
 
 <section class="sec">
   <div class="wrap about-grid">

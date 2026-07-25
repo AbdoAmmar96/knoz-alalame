@@ -43,4 +43,23 @@ class Post extends Model
     {
         return ! $this->body && (bool) $this->source_url;
     }
+
+    /**
+     * نصّ المقال جاهزاً للعرض:
+     * - إن كان يحوي وسوماً (مجلوب من الموقع القديم) يُعرَض كما هو.
+     * - إن كان نصّاً عادياً (من اللوحة) تُلفّ كل فقرة (سطر فارغ فاصل) في <p>.
+     */
+    public function getBodyHtmlAttribute(): string
+    {
+        $body = (string) $this->body;
+        if (str_contains($body, '<p') || str_contains($body, '<h2') || str_contains($body, '<ul')) {
+            return $body;
+        }
+
+        return collect(preg_split('/\n{2,}/', $body))
+            ->map(fn ($p) => trim($p))
+            ->filter()
+            ->map(fn ($p) => '<p>'.e($p).'</p>')
+            ->implode("\n");
+    }
 }

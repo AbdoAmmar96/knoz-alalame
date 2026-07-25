@@ -16,8 +16,8 @@
   --tx:#1B2027; --tx-2:#5C6672; --tx-3:#8B95A1;
   --tx-d:#FFFFFF; --tx-d2:#B9C1CC;
 
-  /* الطباعة */
-  --font:'Cairo',system-ui,-apple-system,sans-serif;
+  /* الطباعة — خط عصري قريب من ستايل إيوان */
+  --font:'Tajawal','Cairo',system-ui,-apple-system,sans-serif;
   --h-xl:clamp(2.2rem,4.9vw,4.15rem);
   --h-lg:clamp(1.9rem,4vw,3.2rem);
   --h-md:clamp(1.25rem,2.2vw,1.6rem);
@@ -90,58 +90,29 @@ h1,h2,h3,h4{line-height:1.22;font-weight:800;color:var(--tx);letter-spacing:-.01
 .link-or svg{width:17px;height:17px;transition:transform .25s var(--ease)}
 .link-or:hover{gap:13px}
 
-/* ===== 5. البريلودر — أبواب مصعد برتقالية واللوجو منقسم على الفتحة ===== */
-/* direction:ltr مقصود — يثبّت ترتيب البابين مهما كان اتجاه الصفحة */
+/* ===== 5. البريلودر — بابا مصعد يفتحان بسرعة ===== */
+/* لا عدّاد ولا انتظار: اللوجو يظهر لحظة ثم ينفتح البابان في أقل من نصف ثانية.
+   direction:ltr مقصود — يثبّت ترتيب البابين مهما كان اتجاه الصفحة. */
 #pre{position:fixed;inset:0;z-index:2000;display:flex;pointer-events:none;direction:ltr}
 #pre .door{position:relative;flex:1;overflow:hidden;
   background:linear-gradient(155deg,#252C36 0%,var(--ink-2) 45%,var(--ink) 100%);
-  transition:transform 1.15s cubic-bezier(.76,0,.24,1) 1.55s}
-/* لمعة معدنية رأسية على الأبواب */
-#pre .door::before{content:"";position:absolute;inset:0;
-  background:repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 2px,transparent 2px 34px);
-  mix-blend-mode:overlay}
-/* خط النور البرتقالي عند فتحة الباب — يتلاشى خلف اللوجو حتى لا يقطعه */
+  transition:transform .5s cubic-bezier(.76,0,.24,1) .12s}
+/* خط النور البرتقالي عند فتحة الباب */
 #pre .door::after{content:"";position:absolute;top:0;bottom:0;width:3px;
   background:linear-gradient(180deg,transparent 4%,var(--orange) 26%,transparent 40%,
     transparent 60%,var(--orange) 74%,transparent 96%)}
 #pre .door.l::after{right:0}
 #pre .door.r::after{left:0}
-/* اللوحة المركزية: اللوجو كامل وواضح فوق البابين، تتلاشى قبل الفتح */
+/* اللوحة المركزية: اللوجو فوق البابين، تتلاشى بسرعة قبل الفتح */
 #pre .hud{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:26px;pointer-events:none;
-  transition:opacity .4s ease 1.5s,transform .5s var(--ease) 1.5s}
-/* نسخة اللوجو المعتمدة للخلفيات الداكنة (صفحة 2 من ملف الهوية) — مقاس هادئ */
-#pre .plate img{width:min(260px,58vw)}
-#pre .led{display:flex;align-items:center;gap:14px;
-  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:16px;
-  padding:10px 22px;color:#fff;font-weight:800;font-size:1.4rem;direction:ltr;
-  letter-spacing:.12em;backdrop-filter:blur(6px)}
-#pre .tri{width:0;height:0;border-inline:8px solid transparent;
-  border-bottom:13px solid var(--orange-2);animation:triBlink .9s infinite}
-/* عدّاد الطوابق: خمس خانات متتابعة بلا تداخل */
-#pre .digits{position:relative;width:1.5em;height:1.35em}
-#pre .digits i{position:absolute;inset:0;display:grid;place-items:center;
-  font-style:normal;opacity:0;animation:preDigit .34s steps(1) forwards}
-#pre .digits i:nth-child(1){animation-delay:0s}
-#pre .digits i:nth-child(2){animation-delay:.34s}
-#pre .digits i:nth-child(3){animation-delay:.68s}
-#pre .digits i:nth-child(4){animation-delay:1.02s}
-/* الخانة الأخيرة تبقى ظاهرة حتى تُفتح الأبواب */
-#pre .digits i:nth-child(5){animation:preDigitHold 1s steps(1) forwards;animation-delay:1.36s}
-@keyframes preDigit{0%{opacity:1}99%{opacity:1}100%{opacity:0}}
-@keyframes preDigitHold{0%,100%{opacity:1}}
-@keyframes triBlink{50%{opacity:.25}}
-/* نقاط الطوابق على جانبي الأبواب */
-#pre .lat{position:absolute;top:0;bottom:0;width:26px;display:flex;flex-direction:column;
-  justify-content:space-evenly;align-items:center;z-index:2}
-#pre .door.l .lat{left:26px}
-#pre .door.r .lat{right:26px}
-#pre .lat span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.4)}
+  align-items:center;justify-content:center;gap:22px;pointer-events:none;
+  transition:opacity .25s ease,transform .3s var(--ease)}
+#pre .plate img{width:min(230px,54vw)}
 /* حالة الفتح */
 body.ready #pre .door.l{transform:translateX(-101%)}
 body.ready #pre .door.r{transform:translateX(101%)}
-body.ready #pre .hud{opacity:0;transform:scale(.94)}
-body.ready #pre{transition:visibility 0s 2.8s;visibility:hidden}
+body.ready #pre .hud{opacity:0;transform:scale(.96)}
+body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
 
 /* ===== 6. الهيدر ===== */
 .hdr{position:fixed;inset-inline:0;top:0;z-index:100;padding-block:16px;
@@ -194,42 +165,21 @@ body.ready #pre{transition:visibility 0s 2.8s;visibility:hidden}
 .drawer-foot .btn{width:100%}
 
 /* ===== 7. الهيرو ===== */
-/* خلفية حيّة: تدرّج زاوي بطيء + بقعتان لونيتان تتنفّسان + شبكة خفيفة + شعاع مائل يمرّ.
-   كلّ الطبقات pointer-events:none وخلف المحتوى (z-index سالب داخل سياق معزول). */
+/* خلفية ثابتة تماماً (لا حركة دائمة): تدرّج دافئ + شبكة خفيفة + وهج برتقالي. */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;isolation:isolate;
   padding-top:130px;padding-bottom:70px;overflow:hidden;
-  background:linear-gradient(140deg,#FFFDFB 0%,var(--cream) 38%,var(--cream-2) 72%,#FDEEDF 100%);
-  background-size:220% 220%;animation:heroPan 26s ease-in-out infinite alternate}
-@keyframes heroPan{from{background-position:0% 0%}to{background-position:100% 100%}}
-/* شبكة معمارية خفيفة */
+  background:linear-gradient(140deg,#FFFDFB 0%,var(--cream) 42%,var(--cream-2) 74%,#FCE7D5 100%)}
+/* شبكة معمارية خفيفة ثابتة */
 .hero::before{content:"";position:absolute;inset:0;z-index:-3;pointer-events:none;opacity:.5;
   background:
     linear-gradient(rgba(29,34,41,.045) 1px,transparent 1px) 0 0/58px 58px,
     linear-gradient(90deg,rgba(29,34,41,.045) 1px,transparent 1px) 0 0/58px 58px;
   mask-image:radial-gradient(120% 90% at 50% 40%,#000 30%,transparent 78%);
   -webkit-mask-image:radial-gradient(120% 90% at 50% 40%,#000 30%,transparent 78%)}
-/* شعاع مائل يعبر الهيرو */
-.hero::after{content:"";position:absolute;top:-30%;bottom:-30%;width:34%;z-index:-2;pointer-events:none;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
-  transform:translateX(-180%) rotate(14deg);animation:heroBeam 11s ease-in-out infinite}
-@keyframes heroBeam{0%{transform:translateX(-180%) rotate(14deg)}
-  55%,100%{transform:translateX(420%) rotate(14deg)}}
 .hero-glow{position:absolute;inset:0;pointer-events:none;z-index:-4;
   background:
-    radial-gradient(760px 520px at 84% 4%,rgba(233,113,28,.20),transparent 62%),
-    radial-gradient(620px 460px at 8% 92%,rgba(23,27,33,.07),transparent 62%)}
-/* بقعتان لونيتان تطوفان ببطء */
-.hero-glow::before,.hero-glow::after{content:"";position:absolute;border-radius:50%;filter:blur(70px)}
-.hero-glow::before{width:min(460px,52vw);aspect-ratio:1;top:-6%;inset-inline-end:6%;
-  background:radial-gradient(circle,rgba(233,113,28,.5),transparent 68%);
-  animation:blobA 17s ease-in-out infinite alternate}
-.hero-glow::after{width:min(400px,48vw);aspect-ratio:1;bottom:-8%;inset-inline-start:2%;
-  background:radial-gradient(circle,rgba(255,183,105,.45),transparent 68%);
-  animation:blobB 21s ease-in-out infinite alternate}
-@keyframes blobA{from{transform:translate3d(0,0,0) scale(1)}
-  to{transform:translate3d(-7%,9%,0) scale(1.16)}}
-@keyframes blobB{from{transform:translate3d(0,0,0) scale(1.1)}
-  to{transform:translate3d(9%,-8%,0) scale(.92)}}
+    radial-gradient(720px 520px at 84% 2%,rgba(233,113,28,.20),transparent 60%),
+    radial-gradient(600px 460px at 6% 98%,rgba(233,113,28,.10),transparent 60%)}
 .hero-grid{position:relative;display:grid;grid-template-columns:1.06fr .94fr;
   gap:clamp(36px,6vw,80px);align-items:center;width:100%}
 .hero h1{margin-bottom:22px}
@@ -261,16 +211,13 @@ body.ready #pre{transition:visibility 0s 2.8s;visibility:hidden}
 
 /* ===== 8. بئر المصعد (الفيجوال) ===== */
 .shaft-wrap{position:relative;display:grid;justify-items:center;gap:18px;isolation:isolate}
-/* هالة برتقالية تدور خلف البئر + حلقة نبض */
+/* وهج برتقالي ثابت خلف البئر + حلقة منقّطة ثابتة (بلا دوران — أداء) */
 .shaft-wrap::before{content:"";position:absolute;z-index:-1;top:50%;left:50%;
-  width:min(520px,108%);aspect-ratio:1;translate:-50% -50%;border-radius:50%;
-  background:conic-gradient(from 0deg,rgba(233,113,28,.30),rgba(255,190,120,.05) 25%,
-    rgba(233,113,28,.26) 50%,rgba(255,190,120,.05) 75%,rgba(233,113,28,.30));
-  filter:blur(38px);animation:spinSlow 24s linear infinite}
+  width:min(480px,106%);aspect-ratio:1;translate:-50% -50%;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(233,113,28,.30),rgba(233,113,28,.08) 56%,transparent 76%)}
 .shaft-wrap::after{content:"";position:absolute;z-index:-1;top:50%;left:50%;
-  width:min(430px,92%);aspect-ratio:1;translate:-50% -50%;border-radius:50%;
-  border:1.5px dashed rgba(233,113,28,.32);animation:spinSlow 40s linear infinite reverse}
-@keyframes spinSlow{to{rotate:360deg}}
+  width:min(420px,92%);aspect-ratio:1;translate:-50% -50%;border-radius:50%;
+  border:1.5px dashed rgba(233,113,28,.28)}
 .shaft{position:relative;width:min(330px,80%);aspect-ratio:.72;border-radius:var(--r-lg);
   background:linear-gradient(168deg,var(--ink-3) 0%,var(--ink) 100%);
   border:1px solid rgba(255,255,255,.09);overflow:hidden;
@@ -286,33 +233,36 @@ body.ready #pre{transition:visibility 0s 2.8s;visibility:hidden}
 .shaft .fl{display:flex;align-items:center;justify-content:center;gap:5px;height:26px;
   border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);
   font-size:.6rem;font-weight:700;color:rgba(255,255,255,.42);direction:ltr;
-  animation:flOn 11s steps(1) infinite}
+  animation:flOn 9s steps(1) infinite}
 .shaft .fl i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.28)}
 .shaft .fl:nth-child(1){animation-delay:0s}
-.shaft .fl:nth-child(2){animation-delay:2.86s}
-.shaft .fl:nth-child(3){animation-delay:5.72s}
-.shaft .fl:nth-child(4){animation-delay:8.58s}
+.shaft .fl:nth-child(2){animation-delay:2.34s}
+.shaft .fl:nth-child(3){animation-delay:4.68s}
+.shaft .fl:nth-child(4){animation-delay:7.02s}
 @keyframes flOn{
   0%{border-color:var(--orange);background:rgba(233,113,28,.2);color:#fff}
   17%{border-color:var(--orange);background:rgba(233,113,28,.2);color:#fff}
   18%,100%{border-color:rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:rgba(255,255,255,.42)}
 }
-.cabin{position:absolute;inset-inline:0;margin-inline:auto;width:44%;height:22%;bottom:6%;
-  border-radius:var(--r-sm);background:#12161B;overflow:hidden;
-  border:1px solid rgba(255,255,255,.16);
-  box-shadow:0 0 0 1px rgba(233,113,28,.3),0 0 40px rgba(233,113,28,.3);
-  animation:ride 11s var(--ease) infinite}
-/* ضوء داخل الكبينة يظهر عند فتح البابين */
+/* الكبينة برتقالية بالكامل زي مصعد إيوان */
+.cabin{position:absolute;inset-inline:0;margin-inline:auto;width:46%;height:22%;bottom:6%;
+  border-radius:var(--r-sm);overflow:hidden;
+  background:linear-gradient(160deg,var(--orange-2),var(--orange) 52%,var(--orange-3));
+  border:1px solid rgba(255,255,255,.3);
+  box-shadow:0 0 0 1px rgba(233,113,28,.55),0 10px 34px rgba(233,113,28,.5),0 0 54px rgba(233,113,28,.34);
+  animation:ride 9s var(--ease) infinite}
+/* ضوء أبيض داخل الكبينة يظهر عند فتح البابين */
 .cabin::before{content:"";position:absolute;inset:0;
-  background:radial-gradient(circle at 50% 42%,rgba(255,216,175,.62),rgba(233,113,28,.2) 58%,transparent 76%)}
-.cabin::after{content:"";position:absolute;top:-6px;inset-inline:26%;height:4px;border-radius:4px;
-  background:var(--orange);box-shadow:0 0 14px var(--orange);z-index:3}
-/* بابا الكبينة — يفتحان عند كل وقفة ويُغلقان قبل الحركة */
+  background:radial-gradient(circle at 50% 45%,rgba(255,248,238,.95),rgba(255,214,170,.45) 56%,transparent 76%)}
+/* عتبة علوية مضيئة */
+.cabin::after{content:"";position:absolute;top:-5px;inset-inline:24%;height:4px;border-radius:4px;
+  background:#FFD9A8;box-shadow:0 0 14px var(--orange-2);z-index:3}
+/* بابا الكبينة — برتقالي أغمق مع خيط ضوء بالمنتصف، يفتحان عند كل وقفة */
 .cabin .cd{position:absolute;top:0;bottom:0;width:50.5%;z-index:2;
-  background:linear-gradient(160deg,#48525F 0%,#2B323B 100%);
-  box-shadow:inset 0 0 12px rgba(0,0,0,.45)}
-.cabin .cd.l{left:0;border-right:1px solid rgba(255,255,255,.22);animation:cabDoorL 11s var(--ease) infinite}
-.cabin .cd.r{right:0;border-left:1px solid rgba(255,255,255,.22);animation:cabDoorR 11s var(--ease) infinite}
+  background:linear-gradient(160deg,#D2620F 0%,#9C440A 100%);
+  box-shadow:inset 0 0 14px rgba(0,0,0,.35)}
+.cabin .cd.l{left:0;border-right:1px solid rgba(255,236,210,.55);animation:cabDoorL 9s var(--ease) infinite}
+.cabin .cd.r{right:0;border-left:1px solid rgba(255,236,210,.55);animation:cabDoorR 9s var(--ease) infinite}
 @keyframes cabDoorL{
   0%,4%{transform:translateX(0)}   8%,14%{transform:translateX(-97%)}
   18%,30%{transform:translateX(0)} 34%,40%{transform:translateX(-97%)}
@@ -341,13 +291,14 @@ body.ready #pre{transition:visibility 0s 2.8s;visibility:hidden}
   box-shadow:var(--sh);direction:ltr}
 .shaft-led .tri{width:0;height:0;border-inline:6px solid transparent;
   border-bottom:10px solid var(--orange);animation:triBlink 1.1s infinite}
+@keyframes triBlink{50%{opacity:.3}}
 .shaft-led .digits{position:relative;width:1.2em;height:1.4em}
 .shaft-led .digits i{position:absolute;inset:0;display:grid;place-items:center;font-style:normal;
-  opacity:0;animation:digitCycle 11s infinite}
+  opacity:0;animation:digitCycle 9s infinite}
 .shaft-led .digits i:nth-child(1){animation-delay:0s}
-.shaft-led .digits i:nth-child(2){animation-delay:2.75s}
-.shaft-led .digits i:nth-child(3){animation-delay:5.5s}
-.shaft-led .digits i:nth-child(4){animation-delay:8.25s}
+.shaft-led .digits i:nth-child(2){animation-delay:2.34s}
+.shaft-led .digits i:nth-child(3){animation-delay:4.68s}
+.shaft-led .digits i:nth-child(4){animation-delay:7.02s}
 @keyframes digitCycle{0%,22%{opacity:1}25%,100%{opacity:0}}
 /* شريحة عائمة */
 .shaft-chip{position:absolute;bottom:11%;inset-inline-end:2%;background:#fff;
@@ -368,20 +319,16 @@ body.ready #pre{transition:visibility 0s 2.8s;visibility:hidden}
 .marquee-track{display:flex;width:max-content;direction:ltr;animation:marq 60s linear infinite}
 .marquee .item{direction:rtl;display:flex;align-items:center;gap:24px;padding-inline:30px;
   color:#fff;font-weight:700;font-size:clamp(1rem,1.5vw,1.25rem);white-space:nowrap}
+/* نقطة برتقالية ثابتة بين العبارات */
 .marquee .item::after{content:"";width:9px;height:9px;border-radius:50%;
-  background:var(--orange);flex-shrink:0;box-shadow:0 0 10px rgba(233,113,28,.7);
-  animation:dotPulse 2.4s ease-in-out infinite}
-@keyframes dotPulse{50%{box-shadow:0 0 18px 3px rgba(233,113,28,.85);transform:scale(1.25)}}
+  background:var(--orange);flex-shrink:0;box-shadow:0 0 10px rgba(233,113,28,.7)}
 @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-25%)}}
 .marquee:hover .marquee-track{animation-play-state:paused}
-/* خيطان برتقاليان يجريان أعلى الشريط وأسفله.
-   no-repeat ضروري: عرض الخلفية أصغر من العنصر فبدونه يتكرّر الخيط عدة مرات. */
+/* خيطان برتقاليان ثابتان أعلى الشريط وأسفله */
 .marquee::before,.marquee::after{content:"";position:absolute;inset-inline:0;height:2px;z-index:2;
-  background:linear-gradient(90deg,transparent,var(--orange),var(--orange-2),transparent);
-  background-size:40% 100%;background-repeat:no-repeat;animation:lineRun 5s linear infinite}
+  background:linear-gradient(90deg,transparent,var(--orange) 40%,var(--orange-2) 60%,transparent)}
 .marquee::before{top:0}
-.marquee::after{bottom:0;animation-direction:reverse}
-@keyframes lineRun{from{background-position:-40% 0}to{background-position:140% 0}}
+.marquee::after{bottom:0}
 
 /* ===== 10. الكاردز ===== */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -526,7 +473,7 @@ body.ready #pre{transition:visibility 0s 2.8s;visibility:hidden}
 
 /* ===== 14. المشاريع والمعرض ===== */
 .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .proj{display:block;background:#fff;border:1.5px solid var(--line);border-radius:var(--r-lg);
   overflow:hidden;transition:transform var(--t),box-shadow var(--t),border-color var(--t)}
 .proj:hover{transform:translateY(-8px);border-color:var(--orange);box-shadow:var(--sh-2)}
@@ -642,60 +589,41 @@ body.ready #pre{transition:visibility 0s 2.8s;visibility:hidden}
 .wa svg{width:29px;height:29px;fill:#fff}
 
 /* ===== 19. هيرو الصفحات الداخلية ===== */
-/* نفس لغة هيرو الرئيسية: خلفية متحرّكة + بقع لونية + شبكة + شعاع مائل */
-.page-hero{position:relative;padding:170px 0 86px;overflow:hidden;isolation:isolate;
-  background:linear-gradient(140deg,#FFFDFB 0%,var(--cream) 34%,var(--cream-2) 70%,#FCEADB 100%);
-  background-size:220% 220%;animation:heroPan 24s ease-in-out infinite alternate;
+/* خلفية ثابتة (بلا حركة دائمة) + محتوى فعلي: عنوان ووصف ومختصرات ومسار. */
+.page-hero{position:relative;padding:148px 0 62px;overflow:hidden;isolation:isolate;
+  background:linear-gradient(140deg,#FFFDFB 0%,var(--cream) 40%,var(--cream-2) 72%,#FCE7D5 100%);
   border-bottom:2px solid transparent;
   border-image:linear-gradient(90deg,var(--orange-3),var(--orange),#FFC078,var(--orange),var(--orange-3)) 1}
-.page-hero .ph-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18;
-  z-index:-4;filter:grayscale(.3) saturate(1.2);transform:scale(1.06);
-  animation:phZoom 26s ease-in-out infinite alternate}
-@keyframes phZoom{from{transform:scale(1.06)}to{transform:scale(1.16) translateY(-2%)}}
+.page-hero .ph-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.16;
+  z-index:-4;filter:grayscale(.3) saturate(1.2)}
 .page-hero::before{content:"";position:absolute;inset:0;z-index:-3;
-  background:linear-gradient(115deg,rgba(251,247,242,.94) 22%,rgba(251,247,242,.74) 56%,rgba(233,113,28,.22) 100%)}
-/* شعاع مائل يعبر الترويسة */
-.page-hero::after{content:"";position:absolute;top:-40%;bottom:-40%;width:30%;z-index:-2;pointer-events:none;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);
-  transform:translateX(-160%) rotate(14deg);animation:heroBeam 10s ease-in-out infinite}
-/* طبقة إضافية: شبكة + بقعتان تتنفّسان */
+  background:linear-gradient(115deg,rgba(251,247,242,.95) 30%,rgba(251,247,242,.8) 60%,rgba(233,113,28,.2) 100%)}
+/* شبكة + وهج ثابتان */
 .ph-fx{position:absolute;inset:0;z-index:-1;pointer-events:none;
   background:
     linear-gradient(rgba(29,34,41,.05) 1px,transparent 1px) 0 0/54px 54px,
-    linear-gradient(90deg,rgba(29,34,41,.05) 1px,transparent 1px) 0 0/54px 54px;
-  mask-image:radial-gradient(110% 100% at 70% 30%,#000 20%,transparent 76%);
-  -webkit-mask-image:radial-gradient(110% 100% at 70% 30%,#000 20%,transparent 76%)}
-.ph-fx::before,.ph-fx::after{content:"";position:absolute;border-radius:50%;filter:blur(64px)}
-.ph-fx::before{width:min(380px,44vw);aspect-ratio:1;top:-24%;inset-inline-end:8%;
-  background:radial-gradient(circle,rgba(233,113,28,.52),transparent 68%);
-  animation:blobA 15s ease-in-out infinite alternate}
-.ph-fx::after{width:min(320px,40vw);aspect-ratio:1;bottom:-34%;inset-inline-start:14%;
-  background:radial-gradient(circle,rgba(255,183,105,.45),transparent 68%);
-  animation:blobB 19s ease-in-out infinite alternate}
+    linear-gradient(90deg,rgba(29,34,41,.05) 1px,transparent 1px) 0 0/54px 54px,
+    radial-gradient(520px 380px at 90% 6%,rgba(233,113,28,.16),transparent 66%);
+  mask-image:radial-gradient(120% 110% at 72% 32%,#000 32%,transparent 82%);
+  -webkit-mask-image:radial-gradient(120% 110% at 72% 32%,#000 32%,transparent 82%)}
 .page-hero .wrap{position:relative}
-/* حلقتان زخرفيتان على الجهة الفارغة تملآن الفراغ وتضيفان حركة */
-/* z-index سالب: تبقى خلف النص مهما تغيّر سياق التكديس */
-.page-hero .wrap::before{content:"";position:absolute;z-index:-1;top:50%;inset-inline-end:3%;
-  translate:0 -50%;width:min(300px,32vw);aspect-ratio:1;border-radius:50%;pointer-events:none;
-  border:1.5px dashed rgba(233,113,28,.32);animation:spinSlow 34s linear infinite}
-.page-hero .wrap::after{content:"";position:absolute;z-index:-1;top:50%;inset-inline-end:10%;
-  translate:0 -50%;width:min(190px,20vw);aspect-ratio:1;border-radius:50%;pointer-events:none;
-  background:conic-gradient(from 0deg,rgba(233,113,28,.42),transparent 42%,rgba(255,183,105,.4));
-  filter:blur(30px);animation:spinSlow 19s linear infinite reverse}
-/* العنوان: خط برتقالي متحرك تحته.
-   width:fit-content لا display:inline-block — العنوان يبقى كتلةً فلا تلتصق
-   به الشريحة العلوية ومسار التنقّل على السطر نفسه. */
-.page-hero h1{font-size:var(--h-lg);margin-bottom:22px;position:relative;
-  width:fit-content;max-width:100%;padding-bottom:14px}
-.page-hero h1::after{content:"";position:absolute;bottom:0;inset-inline-start:0;width:72px;height:4px;
-  border-radius:4px;
-  background:linear-gradient(90deg,var(--orange-3),var(--orange),#FFC078,var(--orange),var(--orange-3));
-  background-size:220% 100%;animation:gradPan 4.5s linear infinite}
-.page-hero .eyebrow{background:rgba(255,255,255,.74);border:1px solid rgba(233,113,28,.28);
+.page-hero .ph-in{max-width:680px}
+.page-hero .eyebrow{background:rgba(255,255,255,.78);border:1px solid rgba(233,113,28,.28);
   border-radius:var(--r-pill);padding:7px 17px 7px 13px;box-shadow:0 6px 18px rgba(233,113,28,.13);
   backdrop-filter:blur(8px)}
 .page-hero .eyebrow::before{width:9px;height:9px;border-radius:50%;background:var(--orange);
   box-shadow:0 0 0 0 rgba(233,113,28,.6);animation:pingDot 2.2s ease-out infinite}
+.page-hero h1{font-size:var(--h-lg);margin:6px 0 16px;position:relative;
+  width:fit-content;max-width:100%;padding-bottom:14px}
+.page-hero h1::after{content:"";position:absolute;bottom:0;inset-inline-start:0;width:72px;height:4px;
+  border-radius:4px;background:linear-gradient(90deg,var(--orange-3),var(--orange),#FFC078)}
+.page-hero .lead{font-size:var(--lead);color:var(--tx-2);max-width:58ch;margin-bottom:22px}
+/* مختصرات تملأ الترويسة بدل تركها فارغة */
+.ph-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.ph-tags span{display:inline-flex;align-items:center;gap:9px;font-size:.86rem;font-weight:700;
+  color:var(--tx);background:rgba(255,255,255,.82);border:1px solid rgba(233,113,28,.28);
+  border-radius:var(--r-pill);padding:8px 16px;box-shadow:var(--sh)}
+.ph-tags span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange);flex-shrink:0}
 .crumbs{display:inline-flex;gap:9px;align-items:center;font-size:var(--small);color:var(--tx-2);
   background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:var(--r-pill);
   padding:7px 16px;backdrop-filter:blur(8px)}
@@ -818,144 +746,101 @@ textarea:focus-visible,summary:focus-visible{outline:3px solid var(--orange);out
 .skip:focus{inset-inline-start:12px}
 
 /* ============================================================
-   25.5 الحركة واللمعان — طبقة عامة تسري على الموقع كله
-   الحركة كلها على background-position أو transform فقط (رخيصة على المعالج)،
-   ومُلغاة تماماً في prefers-reduced-motion أسفل الملف.
+   25.5 اللمعة والتفاعل — طبقة خفيفة على الأداء
+   قاعدة: لا حركة دائمة (infinite) تعتمد background-position أو filter:blur —
+   فهي تُجبر المتصفح على إعادة رسم مستمرة وتُسبّب اللاج. التدرّجات كلها ثابتة،
+   والحركة تأتي فقط عند المرور (transition) أو من عناصر قليلة جداً.
    ============================================================ */
 
-/* --- محرّكات الحركة المشتركة ---
-   مهم: نهاية الإزاحة 100% لا أكثر. التدرّج غير المكرّر يُبلّط (tiling) افتراضياً،
-   ومع background-size أكبر من 100% تبقى حدود البلاطات خارج الصندوق ما دامت
-   الإزاحة ضمن [0,100%]. تجاوزها يُدخل حدّ البلاطة داخل الشاشة فيظهر خط قاطع حاد. */
-@keyframes gradPan{from{background-position:0% 50%}to{background-position:100% 50%}}
-@keyframes gradPanY{from{background-position:50% 0%}to{background-position:50% 100%}}
-@keyframes txShine{from{background-position:0% 0}to{background-position:100% 0}}
-@keyframes sweep{0%{transform:translateX(-130%) skewX(-18deg)}
-  62%,100%{transform:translateX(330%) skewX(-18deg)}}
-@keyframes floatY{50%{transform:translateY(-9px)}}
-
-/* --- النص البرتقالي: تدرّج يجري داخل الحروف --- */
+/* --- النص البرتقالي: تدرّج ثابت داخل الحروف --- */
 @supports (-webkit-background-clip:text) or (background-clip:text){
-  .or{background-image:linear-gradient(100deg,var(--orange-3) 0%,var(--orange) 26%,#FFB864 50%,
-      var(--orange) 74%,var(--orange-3) 100%);
-    background-size:250% 100%;-webkit-background-clip:text;background-clip:text;
-    color:transparent;-webkit-text-fill-color:transparent;
-    animation:txShine 8s linear infinite}
+  .or{background-image:linear-gradient(100deg,var(--orange-3),var(--orange) 45%,var(--orange-2));
+    -webkit-background-clip:text;background-clip:text;
+    color:transparent;-webkit-text-fill-color:transparent}
 }
 
-/* --- الأزرار: تدرّج متحرك + لمعة تعبر عند المرور --- */
+/* --- الأزرار: تدرّج ثابت + لمعة تعبر عند المرور فقط --- */
 .btn{position:relative;overflow:hidden;isolation:isolate}
 .btn::after{content:"";position:absolute;top:0;bottom:0;width:36%;z-index:-1;
   background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);
-  transform:translateX(-140%) skewX(-18deg);transition:transform .8s var(--ease)}
+  transform:translateX(-140%) skewX(-18deg);transition:transform .7s var(--ease)}
 .btn:hover::after{transform:translateX(330%) skewX(-18deg)}
-.btn-primary{background:linear-gradient(115deg,var(--orange-2) 0%,var(--orange) 40%,
-    var(--orange-3) 70%,var(--orange) 100%);
-  background-size:220% 100%;animation:gradPan 9s linear infinite}
-.btn-primary:hover{background-image:linear-gradient(115deg,var(--orange-3),var(--orange));animation:none}
+.btn-primary{background:linear-gradient(118deg,var(--orange-2),var(--orange) 45%,var(--orange-3))}
+.btn-primary:hover{background:linear-gradient(118deg,var(--orange-3),var(--orange))}
 .btn-ghost::after{background:linear-gradient(100deg,transparent,rgba(233,113,28,.22),transparent)}
-/* لمعة تلقائية دائمة على زر الترويسة كي يلفت النظر */
-.hdr .btn-primary::after{animation:sweep 5.5s ease-in-out infinite}
 
-/* --- شريط تقدّم القراءة أعلى الصفحة --- */
+/* --- شريط تقدّم القراءة أعلى الصفحة (يُحرّكه السكرول فقط) --- */
 .hdr::after{content:"";position:absolute;bottom:-1px;inset-inline-start:0;height:3px;
   width:var(--sp,0%);border-start-end-radius:3px;border-end-end-radius:3px;
   background:linear-gradient(90deg,var(--orange-3),var(--orange),#FFC078);
-  box-shadow:0 0 12px rgba(233,113,28,.55);transition:width .1s linear}
+  box-shadow:0 0 12px rgba(233,113,28,.5);transition:width .1s linear}
 
-/* --- مربّعات الأيقونات: تدرّج يتنفّس + لمعة تمرّ --- */
+/* --- مربّعات الأيقونات: تدرّج ثابت + لمعة عند مرور البطاقة --- */
 .card .ic,.feat .ic,.c-item .ic,.quote .av,.sector-in .ic{
   position:relative;overflow:hidden;
-  background-image:linear-gradient(145deg,var(--orange-2) 0%,var(--orange) 45%,var(--orange-3) 100%);
-  background-size:200% 200%;animation:gradPan 7s linear infinite}
+  background-image:linear-gradient(145deg,var(--orange-2),var(--orange) 48%,var(--orange-3))}
 .card .ic svg,.feat .ic svg,.c-item .ic svg,.sector-in .ic svg{position:relative;z-index:2}
 .quote .av{color:#fff}
 .card .ic::after,.feat .ic::after,.c-item .ic::after,.sector-in .ic::after{
-  content:"";position:absolute;top:-40%;bottom:-40%;left:0;width:46%;z-index:1;
-  background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
-  animation:sweep 4.5s ease-in-out infinite}
-.feat .ic::after{animation-delay:.7s}
-.c-item .ic::after{animation-delay:1.1s}
-.sector-in .ic::after{animation-delay:.4s}
+  content:"";position:absolute;top:-40%;bottom:-40%;width:46%;z-index:1;pointer-events:none;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);
+  transform:translateX(-160%) skewX(-16deg);transition:transform .7s var(--ease)}
+.card:hover .ic::after,.feat:hover .ic::after,.c-item:hover .ic::after,.sector:hover .ic::after{
+  transform:translateX(220%) skewX(-16deg)}
 .vals li:hover .ck{background-image:linear-gradient(145deg,var(--orange-2),var(--orange-3))}
 
-/* --- الأشرطة البرتقالية أعلى البطاقات: لونها يجري --- */
-.card::before,.quote::before,.proj .body::before,.a-card .bd::before,.feat::before{
-  background-image:linear-gradient(90deg,var(--orange-3),var(--orange),#FFC078,var(--orange),var(--orange-3));
-  background-size:220% 100%;animation:gradPan 6s linear infinite}
-.feat::before{background-image:linear-gradient(180deg,var(--orange-3),var(--orange),#FFC078,var(--orange),var(--orange-3));
-  background-size:100% 220%;animation:gradPanY 6s linear infinite}
+/* --- الأشرطة البرتقالية أعلى البطاقات: تدرّج ثابت --- */
+.card::before,.quote::before,.proj .body::before,.a-card .bd::before{
+  background-image:linear-gradient(90deg,var(--orange-3),var(--orange),#FFC078)}
+.feat::before{background-image:linear-gradient(180deg,var(--orange-3),var(--orange),#FFC078)}
 
 /* --- لمعة تعبر صور المشاريع والمقالات عند المرور --- */
 .proj .art,.a-card .thumb,.card-img .card-art{position:relative}
 .proj .art::before,.a-card .thumb::before,.card-img .card-art::before{
   content:"";position:absolute;top:-40%;bottom:-40%;width:40%;z-index:3;pointer-events:none;
   background:linear-gradient(100deg,transparent,rgba(255,255,255,.42),transparent);
-  transform:translateX(-140%) skewX(-16deg);transition:transform .9s var(--ease)}
+  transform:translateX(-140%) skewX(-16deg);transition:transform .8s var(--ease)}
 .proj:hover .art::before,.a-card:hover .thumb::before,.card-img:hover .card-art::before{
   transform:translateX(300%) skewX(-16deg)}
 
-/* --- الوسوم: تتحوّل لتدرّج متحرك عند المرور --- */
+/* --- الوسوم عند المرور: تدرّج ثابت --- */
 .proj:hover .tag,.a-card:hover .tag{
-  background-image:linear-gradient(100deg,var(--orange-2),var(--orange-3),var(--orange-2));
-  background-size:220% 100%;animation:gradPan 4s linear infinite}
+  background-image:linear-gradient(100deg,var(--orange-2),var(--orange-3))}
 
-/* --- كل الأقسام: بقع لونية تطوف في الخلفية ---
-   تدرّجات شعاعية على صندوق أوسع من القسم (inset سالب) وتتحرك بالـtransform،
-   فلا حدود بلاطات ولا خطوط قاطعة مهما اتّسعت الشاشة.
-   نستثني الشريطين البرتقالي والداكن لأن لهما طبقاتهما الخاصة. */
+/* --- كل الأقسام: بقعتان لونيتان ثابتتان في الخلفية (بلا حركة) --- */
 .sec:not(.cta-band):not(.contracts-band){overflow:hidden;isolation:isolate}
 .sec:not(.cta-band):not(.contracts-band)>.wrap{position:relative;z-index:1}
-.sec:not(.cta-band):not(.contracts-band)::after{content:"";position:absolute;inset:-14%;z-index:-1;
+.sec:not(.cta-band):not(.contracts-band)::after{content:"";position:absolute;inset:0;z-index:-1;
   pointer-events:none;
   background:
-    radial-gradient(460px 380px at 86% 6%,rgba(233,113,28,.10),transparent 66%),
-    radial-gradient(400px 340px at 8% 94%,rgba(255,183,105,.12),transparent 66%);
-  animation:blobA 22s ease-in-out infinite alternate}
-/* الأقسام الكريمية تحتمل تشبّعاً أعلى */
+    radial-gradient(460px 380px at 88% 4%,rgba(233,113,28,.09),transparent 66%),
+    radial-gradient(400px 340px at 6% 96%,rgba(255,183,105,.11),transparent 66%)}
 .sec.bg-cream::after{background:
-    radial-gradient(460px 380px at 88% 8%,rgba(233,113,28,.17),transparent 64%),
-    radial-gradient(400px 340px at 6% 92%,rgba(255,183,105,.19),transparent 64%)}
+    radial-gradient(460px 380px at 90% 6%,rgba(233,113,28,.15),transparent 64%),
+    radial-gradient(400px 340px at 5% 94%,rgba(255,183,105,.17),transparent 64%)}
 .sec.bg-cream2::after{background:
-    radial-gradient(460px 380px at 12% 6%,rgba(233,113,28,.16),transparent 64%),
-    radial-gradient(420px 350px at 92% 94%,rgba(255,183,105,.20),transparent 64%);
-  animation:blobB 26s ease-in-out infinite alternate}
+    radial-gradient(460px 380px at 10% 5%,rgba(233,113,28,.14),transparent 64%),
+    radial-gradient(420px 350px at 94% 95%,rgba(255,183,105,.18),transparent 64%)}
 
-/* --- الأشرطة الداكنة: الحركة في الصورة وفي وهج ناعم، لا في التدرّج نفسه ---
-   طبقة التعتيم تبقى ثابتة ومتصلة من الحافة للحافة؛ أي تحريك لتدرّج ممتد على
-   عرض القسم كله يُظهر حدّ بلاطة قاطعاً. الحركة تأتي من زحف الصورة وطواف الوهج. */
+/* --- الأشرطة الداكنة: تعتيم ثابت + وهج ثابت --- */
 .stats-band>.wrap,.contracts-band>.wrap{position:relative;z-index:1}
-.stats-band .stats-bg,.contracts-band .band-bg{
-  transform:scale(1.08);animation:bgDrift 30s ease-in-out infinite alternate}
-@keyframes bgDrift{from{transform:scale(1.08) translate3d(0,0,0)}
-  to{transform:scale(1.18) translate3d(-2.5%,-1.5%,0)}}
-/* وهج برتقالي ناعم الحواف يطوف عرض الشريط — بلا أي حدّ حادّ */
-.stats-band::after,.contracts-band::before{content:"";position:absolute;
-  top:-45%;bottom:-45%;width:46%;pointer-events:none;
-  background:radial-gradient(closest-side,rgba(233,113,28,.30),rgba(233,113,28,.10) 55%,transparent 78%);
-  animation:glideX 17s ease-in-out infinite alternate}
-@keyframes glideX{from{transform:translateX(-30%)}to{transform:translateX(190%)}}
-.contracts-band::before{animation-duration:21s}
-.stats-grid .num{background-image:linear-gradient(100deg,var(--orange-2),#FFC078,var(--orange-2));
-  background-size:250% 100%;animation:txShine 6s linear infinite}
+.stats-band .stats-bg,.contracts-band .band-bg{transform:scale(1.06)}
+.stats-band::after,.contracts-band::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(600px 300px at 50% 0,rgba(233,113,28,.18),transparent 70%)}
+.stats-grid .num{background-image:linear-gradient(100deg,var(--orange-2),#FFC078,var(--orange-2))}
 @supports (-webkit-background-clip:text) or (background-clip:text){
   .stats-grid .num{-webkit-background-clip:text;background-clip:text;
     color:transparent;-webkit-text-fill-color:transparent}
 }
 
-/* --- شريط الدعوة: التدرّج نفسه يتحرك --- */
-.cta-band{background-size:220% 220%;animation:gradPan 14s linear infinite}
+/* --- خط العنوان الفرعي: ثابت --- */
+.eyebrow::before{background:linear-gradient(90deg,var(--orange),transparent)}
 
-/* --- خط العنوان الفرعي يمتد ذهاباً وإياباً --- */
-.eyebrow::before{background:linear-gradient(90deg,var(--orange),transparent);
-  background-size:200% 100%;animation:gradPan 3.4s linear infinite}
-
-/* --- زرّ واتساب: حلقة تتمدّد باستمرار (بلا animation على العنصر نفسه
-   كي يبقى transform الخاص بالـ hover فعّالاً) --- */
+/* --- زرّ واتساب: حلقة نبض واحدة (عنصر واحد رخيص) --- */
 .wa::after{content:"";position:absolute;inset:-3px;border-radius:50%;pointer-events:none;
   border:2px solid rgba(37,211,102,.6);animation:waRing 2.6s ease-out infinite}
 @keyframes waRing{0%{transform:scale(1);opacity:.75}
-  70%{transform:scale(1.5);opacity:0}100%{transform:scale(1.5);opacity:0}}
+  70%,100%{transform:scale(1.5);opacity:0}}
 
 /* --- الظهور عند التمرير بتدرّج زمني بين عناصر الشبكة --- */
 .rv{transition-delay:var(--d,0s)}
@@ -1004,8 +889,7 @@ textarea:focus-visible,summary:focus-visible{outline:3px solid var(--orange);out
     padding:16px 15px;box-shadow:0 3px 14px rgba(23,27,33,.05)}
   .pstep .node{position:static;grid-row:1/span 2;width:56px;height:56px;margin:0;border:0;
     color:#fff;box-shadow:0 8px 18px rgba(233,113,28,.3);
-    background-image:linear-gradient(145deg,var(--orange-2),var(--orange) 48%,var(--orange-3));
-    background-size:200% 200%;animation:gradPan 7s linear infinite}
+    background-image:linear-gradient(145deg,var(--orange-2),var(--orange) 48%,var(--orange-3))}
   .pstep .node svg{width:26px;height:26px}
   /* الرقم يتموضع نسبةً إلى البطاقة لأن .node صار static.
      ملاحظة: .n يحمل direction:ltr فتنقلب خصائصه المنطقية — لذا left/right صراحةً.
