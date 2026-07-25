@@ -31,18 +31,24 @@ class ImportLegacyPosts extends Command
         $imgFail = 0;
         $limit = (int) $this->option('limit');
 
-        for ($page = 1; $page <= 8; $page++) {
-            $resp = Http::withoutVerifying()->timeout(60)->retry(2, 1500)
-                ->withHeaders(['User-Agent' => 'Mozilla/5.0 KonozImporter'])
-                ->get($this->api, ['per_page' => 25, 'page' => $page, '_embed' => 1]);
+        for ($page = 1; $page <= 12; $page++) {
+            try {
+                $resp = Http::withoutVerifying()->timeout(60)
+                    ->withHeaders(['User-Agent' => 'Mozilla/5.0 KonozImporter'])
+                    ->get($this->api, ['per_page' => 25, 'page' => $page, '_embed' => 1]);
+            } catch (\Throwable $e) {
+                $this->warn("تعذّر جلب الصفحة {$page}: ".$e->getMessage());
+                break;
+            }
 
             if (! $resp->ok()) {
-                break;
+                break; // لا مزيد من الصفحات (rest_post_invalid_page_number)
             }
             $posts = $resp->json();
             if (empty($posts)) {
                 break;
             }
+            $perPage = count($posts);
 
             foreach ($posts as $p) {
                 $slug = rawurldecode((string) ($p['slug'] ?? ''));
@@ -87,6 +93,9 @@ class ImportLegacyPosts extends Command
                 }
             }
             $this->info("صفحة {$page}: إجمالي مستورد {$imported}");
+            if ($perPage < 25) {
+                break; // آخر صفحة
+            }
         }
 
         if ($this->option('prune') && ! $limit) {
