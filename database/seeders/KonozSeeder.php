@@ -135,7 +135,7 @@ class KonozSeeder extends Seeder
         foreach ($this->data('projects') as $i => $row) {
             Project::updateOrCreate(
                 ['slug' => $this->slug($row['title'], "project-{$i}")],
-                ['title' => $row['title'], 'tag' => $row['tag'], 'image' => $row['image'], 'sort' => $row['sort']],
+                ['title' => $row['title'], 'tag' => $row['tag'], 'body' => $row['body'] ?? null, 'image' => $row['image'], 'sort' => $row['sort']],
             );
         }
 

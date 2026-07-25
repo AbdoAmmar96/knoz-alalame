@@ -20,6 +20,7 @@ Route::get('/services/{service}', [SiteController::class, 'service'])->name('ser
 
 Route::get('/maintenance-contracts', [SiteController::class, 'contracts'])->name('contracts');
 Route::get('/gallery', [SiteController::class, 'gallery'])->name('gallery');
+Route::get('/gallery/{project}', [SiteController::class, 'project'])->name('gallery.show');
 Route::get('/testimonials', [SiteController::class, 'testimonials'])->name('testimonials');
 
 Route::get('/blog', [SiteController::class, 'blog'])->name('blog.index');

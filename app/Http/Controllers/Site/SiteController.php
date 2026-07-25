@@ -106,6 +106,22 @@ class SiteController extends Controller
         ]);
     }
 
+    public function project(Project $project)
+    {
+        abort_unless($project->is_active, 404);
+
+        return view('site.project', [
+            'seo' => Seo::for('gallery', [
+                'title' => $project->title.' | أعمال كنوز العالم للمصاعد بالرياض',
+                'description' => $project->body ?: $project->title.' — من أعمال كنوز العالم للمصاعد في الرياض.',
+                'image' => $project->image,
+                'crumbs' => ['أعمالنا' => route('gallery'), $project->title => route('gallery.show', $project)],
+            ]),
+            'project' => $project,
+            'others' => Project::query()->active()->ordered()->whereKeyNot($project->id)->take(6)->get(),
+        ]);
+    }
+
     public function testimonials()
     {
         return view('site.testimonials', [
