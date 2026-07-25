@@ -55,6 +55,12 @@ h1,h2,h3,h4{line-height:1.22;font-weight:800;color:var(--tx);letter-spacing:-.01
 .bg-cream2{background:var(--cream-2)}
 /* خلفية باردة فاتحة تفصل القسم عن الهيرو بوضوح (بأسلوب إيوان) */
 .bg-soft{background:#EDF1F6}
+/* قسم كحلي: خلفية داكنة بنصوص فاتحة ولمسات برتقالية */
+.bg-navy{background:linear-gradient(165deg,var(--navy-2) 0%,var(--navy) 55%,var(--navy-3) 100%);color:var(--tx-d2)}
+.bg-navy h2,.bg-navy h3,.bg-navy h4{color:#fff}
+.bg-navy .sec-head p{color:rgba(255,255,255,.74)}
+.bg-navy .eyebrow{color:var(--orange-2)}
+.bg-navy .or{color:var(--orange-2)}
 .bg-ink{background:var(--ink-2);color:var(--tx-d2)}
 .bg-ink h2,.bg-ink h3,.bg-ink h4{color:#fff}
 .center{text-align:center}
@@ -382,15 +388,10 @@ body.ready #pre{transition:visibility 0s .62s;visibility:hidden}
 .card-img .card-bd{padding:30px 28px}
 .card-img::before{z-index:3}
 
-/* ===== 10.7 بطاقة الخدمة المميّزة (ثيم كحلي) ===== */
-.card.card-featured{border-color:var(--navy);box-shadow:0 22px 50px rgba(14,27,46,.28);z-index:2}
+/* ===== 10.7 بطاقة الخدمة المميّزة: إطار برتقالي يبرزها على الخلفية الكحلية ===== */
+.card.card-featured{border:2px solid var(--orange);z-index:2;
+  box-shadow:0 0 0 4px rgba(233,113,28,.16),0 22px 48px rgba(233,113,28,.24)}
 .card-featured::before{transform:scaleX(1)} /* الشريط البرتقالي ممتد دائماً */
-.card-featured .card-bd{background:linear-gradient(172deg,var(--navy-2),var(--navy) 62%,var(--navy-3))}
-.card-featured .card-bd h3{color:#fff}
-.card-featured .card-bd p{color:rgba(255,255,255,.8)}
-.card-featured .card-bd .feats li{color:rgba(255,255,255,.86)}
-.card-featured .card-bd .feats li::before{background:var(--orange-2);opacity:1}
-.card-featured .card-bd .link-or{color:var(--orange-2)}
 .card-featured .card-badge{position:absolute;top:14px;inset-inline-end:14px;z-index:4;
   display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:800;color:#fff;
   background:var(--orange);border-radius:var(--r-pill);padding:6px 13px;

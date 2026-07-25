@@ -4,7 +4,7 @@
 
 <x-site.marquee :items="$marquee" />
 
-<section class="sec bg-soft" id="services">
+<section class="sec bg-navy" id="services">
   <div class="wrap">
     <x-sec-head eyebrow="خدماتنا" title="ثلاث خدمات.." or="تخصص واحد">
       كل ما نقوم به يدور حول المصاعد: نُركّبها وفق الأصول منذ البداية، ونصونها لتبقى آمنة، ونُحدّث القديم منها بدلاً من استبداله.
