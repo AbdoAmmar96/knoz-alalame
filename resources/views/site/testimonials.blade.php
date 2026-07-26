@@ -4,6 +4,7 @@
   lead="ثقة عملائنا هي أهم ما نبنيه. هذه بعض تجارب من تعاملوا مع كنوز العالم في تركيب المصاعد وصيانتها وتحديثها في الرياض."
   :tags="['التزام بالمواعيد', 'خدمة موثوقة', 'رضا العملاء']" />
 
+@if($testimonials->isNotEmpty())
 <section class="sec">
   <div class="wrap">
     <x-sec-head center eyebrow="آراء العملاء" title="قالوا" or="عنا">
@@ -14,6 +15,7 @@
     </div>
   </div>
 </section>
+@endif
 
 @if($clients->isNotEmpty())
 <section class="sec bg-cream">

@@ -5,7 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{{ $seo['title'] }}</title>
 <meta name="description" content="{{ $seo['description'] }}" />
+<meta name="keywords" content="مصاعد الرياض, تركيب مصاعد بالرياض, صيانة مصاعد بالرياض, تحديث مصاعد, شركة مصاعد بالرياض, عقود صيانة مصاعد, {{ setting('site_name') }}" />
 <meta name="robots" content="{{ $seo['robots'] }}" />
+<meta name="geo.region" content="SA-01" />
+<meta name="geo.placename" content="{{ setting('city', 'الرياض') }}" />
+<meta name="author" content="{{ setting('site_name') }}" />
 <link rel="canonical" href="{{ $seo['canonical'] }}" />
 <meta name="theme-color" content="#EA711C" />
 <meta property="og:type" content="website" />
@@ -106,6 +110,23 @@
       <div>
         <div class="brand-mark"><img src="{{ asset('logo-white.png') }}" alt="{{ setting('site_name') }}" /></div>
         <p>{{ setting('footer_about') }}</p>
+        @php
+            $ftrSocials = array_values(array_filter([
+                ['label' => 'إنستغرام', 'icon' => 'instagram', 'url' => setting('social_instagram')],
+                ['label' => 'تيك توك', 'icon' => 'tiktok', 'url' => setting('social_tiktok')],
+                ['label' => 'سناب شات', 'icon' => 'snapchat', 'url' => setting('social_snapchat')],
+                ['label' => 'فيسبوك', 'icon' => 'facebook', 'url' => setting('social_facebook')],
+                ['label' => 'إكس', 'icon' => 'x', 'url' => setting('social_x')],
+                ['label' => 'يوتيوب', 'icon' => 'youtube', 'url' => setting('social_youtube')],
+            ], fn ($s) => ! empty($s['url'])));
+        @endphp
+        @if($ftrSocials)
+          <div class="ftr-social" aria-label="حسابات التواصل الاجتماعي">
+            @foreach($ftrSocials as $s)
+              <a href="{{ $s['url'] }}" target="_blank" rel="noopener" aria-label="{{ $s['label'] }}"><x-icon :name="$s['icon']" /></a>
+            @endforeach
+          </div>
+        @endif
       </div>
       <div>
         <h4>روابط سريعة</h4>

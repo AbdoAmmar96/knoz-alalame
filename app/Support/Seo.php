@@ -16,7 +16,9 @@ class Seo
         $base = config("seo.pages.$page", []);
 
         $jsonld = array_merge([self::localBusiness()], $extra['jsonld'] ?? []);
-        if ($page !== 'home') {
+        if ($page === 'home') {
+            $jsonld[] = self::website();
+        } else {
             $jsonld[] = self::breadcrumb($extra['crumbs'] ?? []);
         }
 
@@ -32,22 +34,74 @@ class Seo
 
     public static function localBusiness(): array
     {
+        $url = rtrim(config('app.url'), '/');
+        $city = Setting::get('city', 'الرياض');
+        $phone = Setting::get('phone');
+
+        // روابط الحسابات الرسمية (تساعد جوجل على ربط الموقع بملف النشاط التجاري)
+        $sameAs = array_values(array_filter([
+            Setting::get('social_instagram'),
+            Setting::get('social_tiktok'),
+            Setting::get('social_snapchat'),
+            Setting::get('social_facebook'),
+            Setting::get('social_x'),
+            Setting::get('social_youtube'),
+        ]));
+
         return array_filter([
             '@context' => 'https://schema.org',
             '@type' => 'LocalBusiness',
+            '@id' => $url.'/#business',
             'name' => Setting::get('site_name', 'شركة كنوز العالم للمصاعد'),
+            'alternateName' => 'كنوز العالم للمصاعد',
             'description' => config('seo.pages.home.description'),
-            'telephone' => Setting::get('phone'),
-            'url' => config('app.url'),
+            'slogan' => 'تركيب وصيانة وتحديث المصاعد بالرياض',
+            'telephone' => $phone,
+            'url' => $url,
             'image' => asset('logo.png'),
+            'logo' => asset('logo.png'),
             'priceRange' => '$$',
-            'areaServed' => Setting::get('city', 'الرياض'),
+            'currenciesAccepted' => 'SAR',
             'address' => [
                 '@type' => 'PostalAddress',
-                'addressLocality' => Setting::get('city', 'الرياض'),
+                'streetAddress' => Setting::get('address', 'الرياض'),
+                'addressLocality' => $city,
+                'addressRegion' => 'منطقة الرياض',
                 'addressCountry' => 'SA',
             ],
+            'areaServed' => ['@type' => 'City', 'name' => $city],
+            'openingHoursSpecification' => [[
+                '@type' => 'OpeningHoursSpecification',
+                'dayOfWeek' => ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                'opens' => '00:00',
+                'closes' => '23:59',
+            ]],
+            'contactPoint' => array_filter([
+                '@type' => 'ContactPoint',
+                'telephone' => $phone,
+                'contactType' => 'customer service',
+                'areaServed' => 'SA',
+                'availableLanguage' => ['Arabic'],
+            ]),
+            'knowsAbout' => ['تركيب مصاعد', 'صيانة مصاعد', 'تحديث مصاعد', 'عقود صيانة المصاعد', 'مصاعد ركاب', 'مصاعد بضائع', 'مصاعد بانوراما'],
+            'sameAs' => $sameAs ?: null,
         ]);
+    }
+
+    /** مخطط الموقع (يساعد على ظهور اسم الموقع كعلامة معروفة). */
+    public static function website(): array
+    {
+        $url = rtrim(config('app.url'), '/');
+
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'WebSite',
+            '@id' => $url.'/#website',
+            'name' => Setting::get('site_name', 'شركة كنوز العالم للمصاعد'),
+            'url' => $url,
+            'inLanguage' => 'ar',
+            'publisher' => ['@id' => $url.'/#business'],
+        ];
     }
 
     /** مسار التنقّل — يساعد جوجل على عرض المسار بدل الرابط الخام. */

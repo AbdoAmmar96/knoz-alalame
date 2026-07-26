@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Project;
 use App\Models\Service;
 use Illuminate\Http\Response;
 
@@ -28,6 +29,15 @@ class SitemapController extends Controller
                 'priority' => '0.9',
                 'freq' => 'monthly',
                 'lastmod' => $service->updated_at?->toAtomString(),
+            ];
+        }
+
+        foreach (Project::live() as $project) {
+            $urls[] = [
+                'loc' => route('gallery.show', $project),
+                'priority' => '0.6',
+                'freq' => 'monthly',
+                'lastmod' => $project->updated_at?->toAtomString(),
             ];
         }
 

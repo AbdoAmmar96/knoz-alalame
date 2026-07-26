@@ -32,6 +32,7 @@ class SiteController extends Controller
             'testimonials' => Testimonial::live(),
             'contractPoints' => ContractPoint::live(),
             'projects' => Project::query()->active()->ordered()->take(6)->get(),
+            'clients' => collect(config('clients.list', []))->take(6),
         ]);
     }
 
@@ -140,12 +141,15 @@ class SiteController extends Controller
         ]);
     }
 
-    public function post(Post $post)
+    public function post(\Illuminate\Http\Request $request, Post $post)
     {
         abort_unless($post->is_active, 404);
 
-        // المقالات المنقولة بلا نص كامل تُحوَّل لمصدرها بدل عرض صفحة فارغة
-        if (! $post->body && $post->source_url) {
+        // المقالات المنقولة بلا نص كامل تُحوَّل لمصدرها بدل عرض صفحة فارغة —
+        // لكن لا نُحوّل أبداً لرابط على نفس الدومين (يمنع حلقة إعادة توجيه لا نهائية
+        // بعد نقل الموقع إلى نفس نطاق المصدر konozcompany.com).
+        if (! $post->body && $post->source_url
+            && parse_url($post->source_url, PHP_URL_HOST) !== $request->getHost()) {
             return redirect()->away($post->source_url, 302);
         }
 

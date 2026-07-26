@@ -11,18 +11,23 @@
 
 <div class="clients-grid">
   @foreach($clients as $c)
-    <div class="client-card rv">
-      <div class="client-ic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">{!! $icons[$c['type']] ?? $icons['building'] !!}</svg>
+    <article class="client-card rv">
+      <div class="client-top">
+        <span class="client-ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">{!! $icons[$c['type']] ?? $icons['building'] !!}</svg>
+        </span>
+        <div class="client-id">
+          <b>{{ $c['name'] }}</b>
+          <span class="client-area"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>{{ $c['area'] }}</span>
+        </div>
+        <span class="client-check" title="تم التركيب">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </span>
       </div>
-      <div class="client-bd">
-        <b>{{ $c['name'] }}</b>
-        <span class="client-work">{{ $c['work'] }}</span>
-        <span class="client-area"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>{{ $c['area'] }}</span>
-      </div>
-      <span class="client-check" title="تم التركيب">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-      </span>
-    </div>
+      @if(!empty($c['note']))
+        <p class="client-note">{{ $c['note'] }}</p>
+      @endif
+      <span class="client-work">{{ $c['work'] }}</span>
+    </article>
   @endforeach
 </div>

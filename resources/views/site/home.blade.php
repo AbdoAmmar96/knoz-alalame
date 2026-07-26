@@ -58,6 +58,7 @@
 
 <x-site.contracts-band :points="$contractPoints" :image="setting('hero_image_about')" />
 
+@if($testimonials->isNotEmpty())
 <section class="sec bg-cream2">
   <div class="wrap">
     <x-sec-head center eyebrow="آراء العملاء" title="قالوا" or="عنا" />
@@ -66,6 +67,19 @@
     </div>
   </div>
 </section>
+@endif
+
+@if($clients->isNotEmpty())
+<section class="sec bg-cream2">
+  <div class="wrap">
+    <x-sec-head center eyebrow="عملاؤنا" title="عملاء نفخر" or="بخدمتهم">
+      مشاريع تركيب حقيقية نفّذناها في الرياض لعملاء من الأفراد والشركات والجهات — سكني وتجاري وطبي.
+    </x-sec-head>
+    <x-site.clients :clients="$clients" />
+    <div class="proj-more rv"><a href="{{ route('testimonials') }}" class="btn btn-ghost">كل عملائنا</a></div>
+  </div>
+</section>
+@endif
 
 <x-site.cta-band />
 

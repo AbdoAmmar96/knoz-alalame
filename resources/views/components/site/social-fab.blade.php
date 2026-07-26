@@ -1,8 +1,8 @@
 @php
     // كل منصّة تظهر فقط إن كان رابطها مضبوطاً. واتساب يُبنى من الرقم.
+    // إنستغرام لا يظهر هنا بجانب الموقع — مكانه في الفوتر فقط.
     $socials = array_values(array_filter([
         ['key' => 'whatsapp', 'label' => 'واتساب', 'icon' => 'whatsapp', 'url' => setting('whatsapp') ? whatsapp_url() : null],
-        ['key' => 'instagram', 'label' => 'إنستغرام', 'icon' => 'instagram', 'url' => setting('social_instagram')],
         ['key' => 'tiktok', 'label' => 'تيك توك', 'icon' => 'tiktok', 'url' => setting('social_tiktok')],
         ['key' => 'snapchat', 'label' => 'سناب شات', 'icon' => 'snapchat', 'url' => setting('social_snapchat')],
         ['key' => 'facebook', 'label' => 'فيسبوك', 'icon' => 'facebook', 'url' => setting('social_facebook')],
