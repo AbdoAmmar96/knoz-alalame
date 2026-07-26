@@ -34,7 +34,7 @@ class Resource
                 'columns' => ['title' => 'الخدمة', 'slug' => 'الرابط'],
                 'fields' => [
                     'title' => ['label' => 'اسم الخدمة', 'type' => 'text', 'rules' => 'required|string|max:150'],
-                    'slug' => ['label' => 'الرابط (إنجليزي)', 'type' => 'slug', 'rules' => 'required|alpha_dash|max:150', 'hint' => 'يظهر في العنوان: /services/الرابط — تغييره يكسر الروابط المفهرسة.'],
+                    'slug' => ['label' => 'الرابط', 'type' => 'slug', 'rules' => 'nullable|string|max:150', 'from' => 'title'],
                     'image' => ['label' => 'الصورة', 'type' => 'image'],
                     'body' => ['label' => 'الوصف المختصر', 'type' => 'textarea', 'rules' => 'nullable|string|max:600'],
                     'long_body' => ['label' => 'الشرح الكامل (صفحة الخدمة)', 'type' => 'textarea', 'rows' => 8, 'hint' => 'افصل بين الفقرات بسطر فارغ.'],
@@ -53,7 +53,7 @@ class Resource
                     'title' => ['label' => 'اسم القطاع', 'type' => 'text', 'rules' => 'required|string|max:150'],
                     'body' => ['label' => 'الوصف', 'type' => 'textarea'],
                     'image' => ['label' => 'صورة الخلفية', 'type' => 'image'],
-                    'icon' => ['label' => 'الأيقونة (SVG)', 'type' => 'svg'],
+                    'icon' => ['label' => 'الأيقونة (SVG)', 'type' => 'svg', 'default' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M9 22v-4h6v4M9 6h.01M15 6h.01M9 10h.01M15 10h.01M9 14h.01M15 14h.01"/></svg>'],
                 ],
             ],
 
@@ -66,7 +66,7 @@ class Resource
                 'fields' => [
                     'title' => ['label' => 'العنوان', 'type' => 'text', 'rules' => 'required|string|max:150'],
                     'body' => ['label' => 'الوصف', 'type' => 'textarea'],
-                    'icon' => ['label' => 'الأيقونة (SVG)', 'type' => 'svg'],
+                    'icon' => ['label' => 'الأيقونة (SVG)', 'type' => 'svg', 'default' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>'],
                 ],
             ],
 
@@ -79,7 +79,7 @@ class Resource
                 'fields' => [
                     'title' => ['label' => 'عنوان الخطوة', 'type' => 'text', 'rules' => 'required|string|max:150'],
                     'body' => ['label' => 'الوصف', 'type' => 'textarea'],
-                    'icon' => ['label' => 'الأيقونة (SVG)', 'type' => 'svg'],
+                    'icon' => ['label' => 'الأيقونة (SVG)', 'type' => 'svg', 'default' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'],
                 ],
             ],
 

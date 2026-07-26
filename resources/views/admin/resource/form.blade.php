@@ -19,6 +19,8 @@
 
   <div class="form-grid">
     @foreach($def['fields'] as $name => $field)
+      {{-- الرابط والأيقونة يُولَّدان تلقائياً — لا نعرضهما حتى تبقى الإضافة: اسم + تفاصيل فقط --}}
+      @continue(in_array($field['type'], ['slug', 'svg'], true))
       @php
         $value = old($name, match ($field['type']) {
             'list' => is_array($row->{$name}) ? implode("\n", $row->{$name}) : '',

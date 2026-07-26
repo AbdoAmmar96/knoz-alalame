@@ -142,11 +142,19 @@ class ResourceController extends Controller
                     break;
 
                 case 'slug':
+                    // الحقل مخفي ويُولَّد تلقائياً: على التعديل نُبقي الرابط القديم (حماية السيو)،
+                    // وعلى الإضافة نولّده من العنوان، مع ضمان عدم تكراره.
                     $value = trim((string) $request->input($name));
-                    if ($value === '' && isset($field['from'])) {
-                        $value = $this->slug((string) $request->input($field['from']));
+                    if ($value === '') {
+                        $value = $row->{$name} ?: $this->slug((string) $request->input($field['from'] ?? 'title'));
                     }
-                    $row->{$name} = $value;
+                    $row->{$name} = $this->uniqueSlug($def['model'], $value, $row);
+                    break;
+
+                case 'svg':
+                    // مخفي: نُبقي القيمة الحالية أو نستخدم أيقونة افتراضية
+                    $row->{$name} = trim((string) $request->input($name))
+                        ?: ($row->{$name} ?: ($field['default'] ?? null));
                     break;
 
                 default:
@@ -154,10 +162,12 @@ class ResourceController extends Controller
             }
         }
 
-        if ($row->exists === false && $row->sort === null) {
+        $isNew = ! $row->exists;
+        if ($isNew && $row->sort === null) {
             $row->sort = ($def['model']::max('sort') ?? 0) + 1;
         }
-        $row->is_active = $request->boolean('is_active');
+        // العنصر الجديد يظهر افتراضياً حتى لو لم تُرسَل خانة الظهور
+        $row->is_active = $request->has('is_active') ? $request->boolean('is_active') : $isNew;
         $row->save();
     }
 
@@ -166,5 +176,18 @@ class ResourceController extends Controller
     {
         return trim(preg_replace('/[\s_]+/u', '-',
             preg_replace('/[^\p{Arabic}\p{L}\p{N}\s-]+/u', '', $text)), '-');
+    }
+
+    /** يضمن رابطاً فريداً بإضافة رقم عند التكرار. */
+    private function uniqueSlug(string $model, string $base, Model $row): string
+    {
+        $base = $base !== '' ? $base : 'item';
+        $slug = $base;
+        $i = 1;
+        while ($model::where('slug', $slug)->where('id', '!=', $row->id ?? 0)->exists()) {
+            $slug = $base.'-'.(++$i);
+        }
+
+        return $slug;
     }
 }
